@@ -12,7 +12,7 @@
 
 #TODO: config file
 
-#TODO: check matrix multiplication
+#TODO: add simulations for the four other races too and continue with next steps
 
 install.packages("tidyverse")
 library("dplyr")
@@ -612,9 +612,28 @@ mat_Oth_yr4 <- t(matrix(c(Oth_yr4_r1, Oth_yr4_r2, Oth_yr4_r3, Oth_yr4_r4,
 
 # White:
 sim_1_w <- W_i %*% mat_w_yr1 #output of this (sim_1_w) is student #'s @ end of 18-19
+sim_1_w
 sim_2_w <- sim_1_w %*% mat_w_yr2
-#sim_2_w
+sim_2_w
 sim_3_w <- sim_2_w %*% mat_w_yr3
-#sim_3_w
+sim_3_w
 sim_4_w <- sim_3_w %*% mat_w_yr4
 sim_4_w
+
+sim_5_w <- sim_4_w %*% mat_w_yr4
+sim_5_w
+sim_6_w <- sim_5_w %*% mat_w_yr4
+sim_6_w
+sim_7_w <- sim_6_w %*% mat_w_yr4
+sim_7_w
+sim_8_w <- sim_7_w %*% mat_w_yr4
+sim_8_w
+sim_9_w <- sim_8_w %*% mat_w_yr4
+sim_9_w
+
+# Note: Using the last available transition matrix as a proxy before predicting
+# future transition probabilities, the Markov chain reaches its final "solution"
+# state by iteration 6 (denoted by sim_6_w). At this point, all transient state
+# values are 0 and only absorbing state values are non-zero. This is likely because
+# the same students are being tracked throughout the chain and this is when all have
+# moved on to middle school.
