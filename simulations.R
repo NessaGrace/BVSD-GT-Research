@@ -10,15 +10,18 @@
 
 #TODO: clean up code, add make_matrix_rows(), make_matrix() functions
 
-#TODO: config file, figure out how to not have to load packages each time
+#TODO: config file
 
-install.packages("readr")
-library("readr")
+#TODO: check matrix multiplication
 
 install.packages("tidyverse")
 library("dplyr")
+library(readxl)
 
 source("functions_lib.R")
+
+# Read in data from file:
+data <- read_xlsx("Initial_state_vector_&_transition_probability_parameters.xlsx", sheet=1, guess_max = 10000)
 
 # Initial State Vectors:
 
@@ -56,7 +59,7 @@ TMR_yr1 <- get_column(data, Variable_Type, "2MR yr1", Variable_Value)
 Oth_yr1 <- get_column(data, Variable_Type, "Other yr1", Variable_Value)
 
 # Vectors to feed into transition matrices for year 1:
- 
+
 # White Matrix Rows: (r stands for row)
 # first 13 rows from csv, last 2 rows from absorbing states
 W_yr1_r1 <- c(0, W_yr1[1], 1-W_yr1[1], integer(12))
@@ -337,6 +340,7 @@ TMR_yr3 <- get_column(data, Variable_Type, "2MR yr3", Variable_Value)
 
 # Other Year 3:
 Oth_yr3 <- get_column(data, Variable_Type, "Other yr3", Variable_Value)
+#Oth_yr3
 
 # Vectors to feed into transition matrices for Year 3:
 
@@ -466,7 +470,7 @@ mat_Oth_yr3 <- t(matrix(c(Oth_yr3_r1, Oth_yr3_r2, Oth_yr3_r3, Oth_yr3_r4,
 # White Year 4:
 #W_yr4 <- c(data$Variable_Value[76:88]) #keep for reference just in case
 W_yr4 <- get_column(data, Variable_Type, "White yr4", Variable_Value)
-W_yr4
+#W_yr4
 
 # Asian Year 4:
 A_yr4 <- get_column(data, Variable_Type, "Asian yr4", Variable_Value)
@@ -476,6 +480,7 @@ L_yr4 <- get_column(data, Variable_Type, "Latinx yr4", Variable_Value)
 
 # 2MR Year 4:
 TMR_yr4 <- get_column(data, Variable_Type, "2MR yr4", Variable_Value)
+#TMR_yr4
 
 # Other Year 4:
 Oth_yr4 <- get_column(data, Variable_Type, "Other yr4", Variable_Value)
@@ -612,4 +617,4 @@ sim_2_w <- sim_1_w %*% mat_w_yr2
 sim_3_w <- sim_2_w %*% mat_w_yr3
 #sim_3_w
 sim_4_w <- sim_3_w %*% mat_w_yr4
-#sim_4_w
+sim_4_w
