@@ -12,7 +12,7 @@
 
 #TODO: config file
 
-#TODO: add simulations for the four other races too and continue with next steps
+#TODO: add simulations for the 3 other race groups too and continue with next steps
 
 install.packages("tidyverse")
 library("dplyr")
@@ -612,28 +612,52 @@ mat_Oth_yr4 <- t(matrix(c(Oth_yr4_r1, Oth_yr4_r2, Oth_yr4_r3, Oth_yr4_r4,
 
 # White:
 sim_1_w <- W_i %*% mat_w_yr1 #output of this (sim_1_w) is student #'s @ end of 18-19
-sim_1_w
+#sim_1_w
 sim_2_w <- sim_1_w %*% mat_w_yr2
-sim_2_w
+#sim_2_w
 sim_3_w <- sim_2_w %*% mat_w_yr3
-sim_3_w
+#sim_3_w
 sim_4_w <- sim_3_w %*% mat_w_yr4
-sim_4_w
+#sim_4_w
 
 sim_5_w <- sim_4_w %*% mat_w_yr4
-sim_5_w
+#sim_5_w
 sim_6_w <- sim_5_w %*% mat_w_yr4
-sim_6_w
+#sim_6_w
 sim_7_w <- sim_6_w %*% mat_w_yr4
-sim_7_w
+#sim_7_w
 sim_8_w <- sim_7_w %*% mat_w_yr4
-sim_8_w
+#sim_8_w
 sim_9_w <- sim_8_w %*% mat_w_yr4
-sim_9_w
+#sim_9_w
+
+# Asian:
+sim_1_a <- A_i %*% mat_a_yr1 #output of this (sim_1_a) is student #'s @ end of 18-19
+#sim_1_a
+sim_2_a <- sim_1_a %*% mat_a_yr2
+#sim_2_a
+sim_3_a <- sim_2_a %*% mat_a_yr3
+#sim_3_a
+sim_4_a <- sim_3_a %*% mat_a_yr4
+#sim_4_a
+
+sim_5_a <- sim_4_a %*% mat_a_yr4
+#sim_5_a
+sim_6_a <- sim_5_a %*% mat_a_yr4
+#sim_6_a
+sim_7_a <- sim_6_a %*% mat_a_yr4
+#sim_7_a
+sim_8_a <- sim_7_a %*% mat_a_yr4
+#sim_8_a
+sim_9_a <- sim_8_a %*% mat_a_yr4
+#sim_9_a
 
 # Note: Using the last available transition matrix as a proxy before predicting
 # future transition probabilities, the Markov chain reaches its final "solution"
-# state by iteration 6 (denoted by sim_6_w). At this point, all transient state
+# state by iteration 6 (denoted by sim_6_w for White for example). At this point, all transient state
 # values are 0 and only absorbing state values are non-zero. This is likely because
 # the same students are being tracked throughout the chain and this is when all have
-# moved on to middle school.
+# moved on to middle school. This makes sense since iteration 6 corresponds to grade 6.
+# Student numbers in each grade go down by year (none in K, none in K or 1, none in K, 1, 
+# or 2, etc.) until only students in the MS absorbing state are left. This happens for all
+# 5 chains.
