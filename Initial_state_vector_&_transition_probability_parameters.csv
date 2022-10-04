@@ -1,5 +1,5 @@
 ﻿Variable_Type,Variable_Name,Variable_Value
-White initial,K_B_W_i ,0
+White initial,K_B_W_i ,1213
 White initial,K_GT_W_i ,6
 White initial,K_NGT_W_i ,1311
 White initial,Gr_1_GT_W_i ,37
@@ -14,7 +14,7 @@ White initial,Gr_5_GT_W_i ,336
 White initial,Gr_5_NGT_W_i ,1230
 White initial,MS_GT_W_i ,383
 White initial,MS_NGT_W_i ,1323
-Asian initial ,K_B_A_i ,0
+Asian initial ,K_B_A_i ,89
 Asian initial ,K_GT_A_i ,0
 Asian initial ,K_NGT_A_i ,130
 Asian initial ,Gr_1_GT_A_i ,3
@@ -29,7 +29,7 @@ Asian initial ,Gr_5_GT_A_i ,30
 Asian initial ,Gr_5_NGT_A_i ,93
 Asian initial ,MS_GT_A_i ,38
 Asian initial ,MS_NGT_A_i ,104
-Latinx initial,K_B_L_i ,0
+Latinx initial,K_B_L_i ,369
 Latinx initial,K_GT_L_i ,0
 Latinx initial,K_NGT_L_i ,361
 Latinx initial,Gr_1_GT_L_i ,4
@@ -44,7 +44,7 @@ Latinx initial,Gr_5_GT_L_i ,41
 Latinx initial,Gr_5_NGT_L_i ,386
 Latinx initial,MS_GT_L_i ,45
 Latinx initial,MS_NGT_L_i ,383
-2MR initial,K_B_2MR_i ,0
+2MR initial,K_B_2MR_i ,131
 2MR initial,K_GT_2MR_i ,1
 2MR initial,K_NGT_2MR_i ,113
 2MR initial,Gr_1_GT_2MR_i ,2
@@ -59,7 +59,7 @@ Latinx initial,MS_NGT_L_i ,383
 2MR initial,Gr_5_NGT_2MR_i ,97
 2MR initial,MS_GT_2MR_i ,34
 2MR initial,MS_NGT_2MR_i ,116
-Other initial,K_B_Oth_i ,0
+Other initial,K_B_Oth_i ,26
 Other initial,K_GT_Oth_i ,0
 Other initial,K_NGT_Oth_i ,19
 Other initial,Gr_1_GT_Oth_i ,0
@@ -256,58 +256,58 @@ Latinx yr3,Epsilon_MS_Yr_3_L,0.00530504
 2MR yr3,Epsilon_4_Yr_3_2MR,0.039215686
 2MR yr3,Beta_MS_Yr_3_2MR,1
 2MR yr3,Epsilon_MS_Yr_3_2MR,0.010989011
-Oth yr3,Beta_0_Yr_3_Oth,0.00
-Oth yr3,Beta_1_Yr_3_Oth,0.00
-Oth yr3,Epsilon_0_Yr_3_Oth,0.00
-Oth yr3,Beta_2_Yr_3_Oth,0.00
-Oth yr3,Epsilon_1_Yr_3_Oth,0.00
-Oth yr3,Beta_3_Yr_3_Oth,1.00
-Oth yr3,Epsilon_2_Yr_3_Oth,0.08
-Oth yr3,Beta_4_Yr_3_Oth,1.00
-Oth yr3,Epsilon_3_Yr_3_Oth,0.00
-Oth yr3,Beta_5_Yr_3_Oth,0.00
-Oth yr3,Epsilon_4_Yr_3_Oth,0.03
-Oth yr3,Beta_MS_Yr_3_Oth,1.00
-Oth yr3,Epsilon_MS_Yr_3_Oth,0.00
-W yr4,Beta_0_Yr_4_W,0.02
-W yr4,Beta_1_Yr_4_W,1.00
-W yr4,Epsilon_0_Yr_4_W,0.03
-W yr4,Beta_2_Yr_4_W,1.00
-W yr4,Epsilon_1_Yr_4_W,0.10
-W yr4,Beta_3_Yr_4_W,1.00
-W yr4,Epsilon_2_Yr_4_W,0.10
-W yr4,Beta_4_Yr_4_W,1.00
-W yr4,Epsilon_3_Yr_4_W,0.08
-W yr4,Beta_5_Yr_4_W,1.00
-W yr4,Epsilon_4_Yr_4_W,0.06
-W yr4,Beta_MS_Yr_4_W,1.00
-W yr4,Epsilon_MS_Yr_4_W,0.01
-A yr4,Beta_0_Yr_4_A,0.02
-A yr4,Beta_1_Yr_4_A,1.00
-A yr4,Epsilon_0_Yr_4_A,0.03
-A yr4,Beta_2_Yr_4_A,1.00
-A yr4,Epsilon_1_Yr_4_A,0.13
-A yr4,Beta_3_Yr_4_A,1.00
-A yr4,Epsilon_2_Yr_4_A,0.09
-A yr4,Beta_4_Yr_4_A,1.00
-A yr4,Epsilon_3_Yr_4_A,0.13
-A yr4,Beta_5_Yr_4_A,1.00
-A yr4,Epsilon_4_Yr_4_A,0.08
-A yr4,Beta_MS_Yr_4_A,1.00
-A yr4,Epsilon_MS_Yr_4_A,0.01
-L yr4,Beta_0_Yr_4_L,0.00
-L yr4,Beta_1_Yr_4_L,2.00
-L yr4,Epsilon_0_Yr_4_L,0.02
-L yr4,Beta_2_Yr_4_L,1.00
-L yr4,Epsilon_1_Yr_4_L,0.05
-L yr4,Beta_3_Yr_4_L,1.00
-L yr4,Epsilon_2_Yr_4_L,0.07
-L yr4,Beta_4_Yr_4_L,1.00
-L yr4,Epsilon_3_Yr_4_L,0.04
-L yr4,Beta_5_Yr_4_L,1.00
-L yr4,Epsilon_4_Yr_4_L,0.02
-L yr4,Beta_MS_Yr_4_L,1.00
-L yr4,Epsilon_MS_Yr_4_L,0.01
+Other yr3,Beta_0_Yr_3_Oth,0
+Other yr3,Beta_1_Yr_3_Oth,0
+Other yr3,Epsilon_0_Yr_3_Oth,0
+Other yr3,Beta_2_Yr_3_Oth,0
+Other yr3,Epsilon_1_Yr_3_Oth,0
+Other yr3,Beta_3_Yr_3_Oth,1
+Other yr3,Epsilon_2_Yr_3_Oth,0.083333333
+Other yr3,Beta_4_Yr_3_Oth,1
+Other yr3,Epsilon_3_Yr_3_Oth,0
+Other yr3,Beta_5_Yr_3_Oth,0
+Other yr3,Epsilon_4_Yr_3_Oth,0.029411765
+Other yr3,Beta_MS_Yr_3_Oth,1
+Other yr3,Epsilon_MS_Yr_3_Oth,0
+White yr4,Beta_0_Yr_4_W,0.018331806
+White yr4,Beta_1_Yr_4_W,1
+White yr4,Epsilon_0_Yr_4_W,0.030815109
+White yr4,Beta_2_Yr_4_W,1
+White yr4,Epsilon_1_Yr_4_W,0.097210482
+White yr4,Beta_3_Yr_4_W,1
+White yr4,Epsilon_2_Yr_4_W,0.096975089
+White yr4,Beta_4_Yr_4_W,1
+White yr4,Epsilon_3_Yr_4_W,0.07678729
+White yr4,Beta_5_Yr_4_W,1
+White yr4,Epsilon_4_Yr_4_W,0.056910569
+White yr4,Beta_MS_Yr_4_W,1
+White yr4,Epsilon_MS_Yr_4_W,0.006499536
+Asian yr4,Beta_0_Yr_4_A,0.02173913
+Asian yr4,Beta_1_Yr_4_A,1
+Asian yr4,Epsilon_0_Yr_4_A,0.032967033
+Asian yr4,Beta_2_Yr_4_A,1
+Asian yr4,Epsilon_1_Yr_4_A,0.132653061
+Asian yr4,Beta_3_Yr_4_A,1
+Asian yr4,Epsilon_2_Yr_4_A,0.090909091
+Asian yr4,Beta_4_Yr_4_A,1
+Asian yr4,Epsilon_3_Yr_4_A,0.131313131
+Asian yr4,Beta_5_Yr_4_A,1
+Asian yr4,Epsilon_4_Yr_4_A,0.079545455
+Asian yr4,Beta_MS_Yr_4_A,1
+Asian yr4,Epsilon_MS_Yr_4_A,0.012820513
+Latinx yr4,Beta_0_Yr_4_L,0.00308642
+Latinx yr4,Beta_1_Yr_4_L,2
+Latinx yr4,Epsilon_0_Yr_4_L,0.015151515
+Latinx yr4,Beta_2_Yr_4_L,1
+Latinx yr4,Epsilon_1_Yr_4_L,0.050802139
+Latinx yr4,Beta_3_Yr_4_L,1
+Latinx yr4,Epsilon_2_Yr_4_L,0.06741573
+Latinx yr4,Beta_4_Yr_4_L,1
+Latinx yr4,Epsilon_3_Yr_4_L,0.036253776
+Latinx yr4,Beta_5_Yr_4_L,1
+Latinx yr4,Epsilon_4_Yr_4_L,0.022792023
+Latinx yr4,Beta_MS_Yr_4_L,1
+Latinx yr4,Epsilon_MS_Yr_4_L,0.014044944
 2MR yr4,Beta_0_Yr_4_2MR,0.00729927
 2MR yr4,Beta_1_Yr_4_2MR,1
 2MR yr4,Epsilon_0_Yr_4_2MR,0.011111111
@@ -321,16 +321,16 @@ L yr4,Epsilon_MS_Yr_4_L,0.01
 2MR yr4,Epsilon_4_Yr_4_2MR,0.052083333
 2MR yr4,Beta_MS_Yr_4_2MR,1
 2MR yr4,Epsilon_MS_Yr_4_2MR,0.021276596
-Oth yr4,Beta_0_Yr_4_Oth,0.03
-Oth yr4,Beta_1_Yr_4_Oth,0.00
-Oth yr4,Epsilon_0_Yr_4_Oth,0.00
-Oth yr4,Beta_2_Yr_4_Oth,0.00
-Oth yr4,Epsilon_1_Yr_4_Oth,0.05
-Oth yr4,Beta_3_Yr_4_Oth,0.00
-Oth yr4,Epsilon_2_Yr_4_Oth,0.00
-Oth yr4,Beta_4_Yr_4_Oth,1.00
-Oth yr4,Epsilon_3_Yr_4_Oth,0.00
-Oth yr4,Beta_5_Yr_4_Oth,1.00
-Oth yr4,Epsilon_4_Yr_4_Oth,0.04
-Oth yr4,Beta_MS_Yr_4_Oth,1.00
-Oth yr4,Epsilon_MS_Yr_4_Oth,0.00
+Other yr4,Beta_0_Yr_4_Oth,0.033333333
+Other yr4,Beta_1_Yr_4_Oth,0
+Other yr4,Epsilon_0_Yr_4_Oth,0
+Other yr4,Beta_2_Yr_4_Oth,0
+Other yr4,Epsilon_1_Yr_4_Oth,0.052631579
+Other yr4,Beta_3_Yr_4_Oth,0
+Other yr4,Epsilon_2_Yr_4_Oth,0
+Other yr4,Beta_4_Yr_4_Oth,1
+Other yr4,Epsilon_3_Yr_4_Oth,0
+Other yr4,Beta_5_Yr_4_Oth,1
+Other yr4,Epsilon_4_Yr_4_Oth,0.035714286
+Other yr4,Beta_MS_Yr_4_Oth,1
+Other yr4,Epsilon_MS_Yr_4_Oth,0
