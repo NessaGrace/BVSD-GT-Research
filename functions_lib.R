@@ -8,6 +8,11 @@ get_column <- function(tibble_name,
   return (t(output_vector))
 }
 
+get_kb <- function(var_type_string){
+  kb <- get_column(data, Variable_Type, var_type_string, Variable_Value)
+  kb <- c(kb, integer(14))
+}
+
 
 # make_matrix_rows <- function(){
 #   
