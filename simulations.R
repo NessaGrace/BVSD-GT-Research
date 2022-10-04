@@ -8,15 +8,13 @@
 #         Gr_2_GT_W_i, Gr_2_NGT_W_i, Gr_3_GT_W_i, Gr_3_NGT_W_i, Gr_4_GT_W_i,
 #         Gr_4_NGT_W_i, Gr_5_GT_W_i, Gr_5_NGT_W_i, MS_GT_W_i, MS_NGT_W_i)
 
-#TODO: clean up code, add make_matrix_rows(), make_matrix() functions
+#TODO: clean up code, add make_matrix_rows(), make_matrix(), get_k_b() functions
 
 #TODO: config file
 
-#TODO: add simulations for the 3 other race groups too and continue with next steps
-
-#TODO: add K_B values for yr 2 and on to Excel and update csv, add these to simulations,
-#make sure they make sense with output, and finish other sim's, do functions & config,
-#make visualizations and do trends modeling next (see other lists)
+#TODO: add K_B's to simulations, make sure they make sense with output, and finish 
+#other sim's, do functions & config, make visualizations and do trends modeling next 
+#(see other lists)
 
 install.packages("tidyverse")
 library("dplyr")
@@ -639,8 +637,11 @@ sim_9_w <- sim_8_w %*% mat_w_yr4
 # Asian:
 sim_1_a <- A_i %*% mat_a_yr1 #output of this (sim_1_a) is student #'s @ end of 18-19
 sim_1_a
-sim_2_a <- sim_1_a %*% mat_a_yr2
+
+sim_2_a_kb <- get_kb("Asian yr2 K_B")
+sim_2_a <- (sim_1_a + sim_2_a_kb) %*% mat_a_yr2
 sim_2_a
+
 sim_3_a <- sim_2_a %*% mat_a_yr3
 #sim_3_a
 sim_4_a <- sim_3_a %*% mat_a_yr4
