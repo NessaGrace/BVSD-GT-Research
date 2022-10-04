@@ -14,6 +14,10 @@
 
 #TODO: add simulations for the 3 other race groups too and continue with next steps
 
+#TODO: add K_B values for yr 2 and on to Excel and update csv, add these to simulations,
+#make sure they make sense with output, and finish other sim's, do functions & config,
+#make visualizations and do trends modeling next (see other lists)
+
 install.packages("tidyverse")
 library("dplyr")
 library(readxl)
@@ -631,11 +635,12 @@ sim_8_w <- sim_7_w %*% mat_w_yr4
 sim_9_w <- sim_8_w %*% mat_w_yr4
 #sim_9_w
 
+
 # Asian:
 sim_1_a <- A_i %*% mat_a_yr1 #output of this (sim_1_a) is student #'s @ end of 18-19
-#sim_1_a
+sim_1_a
 sim_2_a <- sim_1_a %*% mat_a_yr2
-#sim_2_a
+sim_2_a
 sim_3_a <- sim_2_a %*% mat_a_yr3
 #sim_3_a
 sim_4_a <- sim_3_a %*% mat_a_yr4
