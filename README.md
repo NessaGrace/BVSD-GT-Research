@@ -42,5 +42,5 @@ features will be added to the code in a future release.
 - Oth is other (Black/African American, Native American/Native Alaskan,
   Native Hawaiian/Pacific Islander)
 - Need to add more details like complete variable name descriptions later 
-
+- The K_B values for the initial state vectors are from 2018-19, not 2017-18.
 
