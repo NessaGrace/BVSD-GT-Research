@@ -12,9 +12,23 @@
 
 #TODO: config file
 
+#TODO: improve variable names? esp TMR vs 2MR
+
 #TODO: add K_B's to simulations, make sure they make sense with output, and finish 
 #other sim's, do functions & config, make visualizations and do trends modeling next 
 #(see other lists)
+
+# Note: The absorbing states continue to grow. For example, the GT MS population is 66
+# for Asian students in year 1 because it adds the 38 students in this state at the end of
+# 17-18 from the initial state vector with the 28 students who enter this state at the end of
+# year 1.
+
+# Note: Students pass through the chain to the absorbing states where they collect. New students
+# are fed into the chain using the K_B vectors to represent the number of kindergartners
+# entering the district every year. K_B is always 0 at the end of the year, as students
+# have been sorted into GT or non-GT by the end of the year. K_B's for year 1 (18-19) are 
+# included in the initial state vectors. These are the kindergartners entering the district
+# in the 18-19 year and were in pre-K in the 17-18 year.
 
 install.packages("tidyverse")
 library("dplyr")
@@ -614,25 +628,21 @@ mat_Oth_yr4 <- t(matrix(c(Oth_yr4_r1, Oth_yr4_r2, Oth_yr4_r3, Oth_yr4_r4,
 
 # White:
 sim_1_w <- W_i %*% mat_w_yr1 #output of this (sim_1_w) is student #'s @ end of 18-19
-#sim_1_w
-sim_2_w <- sim_1_w %*% mat_w_yr2
-#sim_2_w
-sim_3_w <- sim_2_w %*% mat_w_yr3
-#sim_3_w
-sim_4_w <- sim_3_w %*% mat_w_yr4
-#sim_4_w
+sim_1_w
 
-sim_5_w <- sim_4_w %*% mat_w_yr4
-#sim_5_w
-sim_6_w <- sim_5_w %*% mat_w_yr4
-#sim_6_w
-sim_7_w <- sim_6_w %*% mat_w_yr4
-#sim_7_w
-sim_8_w <- sim_7_w %*% mat_w_yr4
-#sim_8_w
-sim_9_w <- sim_8_w %*% mat_w_yr4
-#sim_9_w
+sim_2_w_kb <- get_kb("White yr2 K_B")
+sim_2_w <- (sim_1_w + sim_2_w_kb) %*% mat_w_yr2
+sim_2_w
 
+sim_3_w_kb <- get_kb("White yr3 K_B")
+sim_3_w <- (sim_2_w + sim_3_w_kb) %*% mat_w_yr3
+sim_3_w
+
+sim_4_w_kb <- get_kb("White yr4 K_B")
+sim_4_w <- (sim_3_w + sim_4_w_kb) %*% mat_w_yr4
+sim_4_w
+
+# Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
 
 # Asian:
 sim_1_a <- A_i %*% mat_a_yr1 #output of this (sim_1_a) is student #'s @ end of 18-19
@@ -642,33 +652,66 @@ sim_2_a_kb <- get_kb("Asian yr2 K_B")
 sim_2_a <- (sim_1_a + sim_2_a_kb) %*% mat_a_yr2
 sim_2_a
 
-sim_3_a <- sim_2_a %*% mat_a_yr3
-#sim_3_a
-sim_4_a <- sim_3_a %*% mat_a_yr4
-#sim_4_a
+sim_3_a_kb <- get_kb("Asian yr3 K_B")
+sim_3_a <- (sim_2_a + sim_3_a_kb) %*% mat_a_yr3
+sim_3_a
 
-sim_5_a <- sim_4_a %*% mat_a_yr4
-#sim_5_a
-sim_6_a <- sim_5_a %*% mat_a_yr4
-#sim_6_a
-sim_7_a <- sim_6_a %*% mat_a_yr4
-#sim_7_a
-sim_8_a <- sim_7_a %*% mat_a_yr4
-#sim_8_a
-sim_9_a <- sim_8_a %*% mat_a_yr4
-#sim_9_a
+sim_4_a_kb <- get_kb("Asian yr4 K_B")
+sim_4_a <- (sim_3_a + sim_4_a_kb) %*% mat_a_yr4
+sim_4_a
 
-# Note: The absorbing states continue to grow. For example, the GT MS population is 66
-# for Asian students in year 1 because it adds the 38 students in this state at the end of
-# 17-18 from the initial state vector with the 28 students who enter this state at the end of
-# year 1.
+# Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
 
-# Note: Using the last available transition matrix as a proxy before predicting
-# future transition probabilities, the Markov chain reaches its final "solution"
-# state by iteration 6 (denoted by sim_6_w for White for example). At this point, all transient state
-# values are 0 and only absorbing state values are non-zero. This is likely because
-# the same students are being tracked throughout the chain and this is when all have
-# moved on to middle school. This makes sense since iteration 6 corresponds to grade 6.
-# Student numbers in each grade go down by year (none in K, none in K or 1, none in K, 1, 
-# or 2, etc.) until only students in the MS absorbing state are left. This happens for all
-# 5 chains.
+# Latinx:
+sim_1_L <- L_i %*% mat_L_yr1 #output of this (sim_1_L) is student #'s @ end of 18-19
+sim_1_L
+
+sim_2_L_kb <- get_kb("Latinx yr2 K_B")
+sim_2_L <- (sim_1_L + sim_2_L_kb) %*% mat_L_yr2
+sim_2_L
+
+sim_3_L_kb <- get_kb("Latinx yr3 K_B")
+sim_3_L <- (sim_2_L + sim_3_L_kb) %*% mat_L_yr3
+sim_3_L
+
+sim_4_L_kb <- get_kb("Latinx yr4 K_B")
+sim_4_L <- (sim_3_L + sim_4_L_kb) %*% mat_L_yr4
+sim_4_L
+
+# Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
+
+# TMR:
+sim_TMR <- TMR_i %*% mat_TMR_yr1 #output of this (sim_1_TMR) is student #'s @ end of 18-19
+sim_1_TMR
+
+sim_2_TMR_kb <- get_kb("2MR yr2 K_B")
+sim_2_TMR <- (sim_1_TMR + sim_2_TMR_kb) %*% mat_TMR_yr2
+sim_2_TMR
+
+sim_3_TMR_kb <- get_kb("2MR yr3 K_B")
+sim_3_TMR <- (sim_2_TMR + sim_3_TMR_kb) %*% mat_TMR_yr3
+sim_3_TMR
+
+sim_4_TMR_kb <- get_kb("2MR yr4 K_B")
+sim_4_TMR <- (sim_3_TMR + sim_4_TMR_kb) %*% mat_TMR_yr4
+sim_4_TMR
+
+# Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
+
+# Other:
+sim_Oth <- Oth_i %*% mat_Oth_yr1 #output of this (sim_1_Oth) is student #'s @ end of 18-19
+sim_1_Oth
+
+sim_2_Oth_kb <- get_kb("Other yr2 K_B")
+sim_2_Oth <- (sim_1_Oth + sim_2_Oth_kb) %*% mat_Oth_yr2
+sim_2_Oth
+
+sim_3_Oth_kb <- get_kb("Other yr3 K_B")
+sim_3_Oth <- (sim_2_Oth + sim_3_Oth_kb) %*% mat_Oth_yr3
+sim_3_Oth
+
+sim_4_Oth_kb <- get_kb("Other yr4 K_B")
+sim_4_Oth <- (sim_3_Oth + sim_4_Oth_kb) %*% mat_Oth_yr4
+sim_4_Oth
+
+# Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
