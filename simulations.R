@@ -658,6 +658,11 @@ sim_8_a <- sim_7_a %*% mat_a_yr4
 sim_9_a <- sim_8_a %*% mat_a_yr4
 #sim_9_a
 
+# Note: The absorbing states continue to grow. For example, the GT MS population is 66
+# for Asian students in year 1 because it adds the 38 students in this state at the end of
+# 17-18 from the initial state vector with the 28 students who enter this state at the end of
+# year 1.
+
 # Note: Using the last available transition matrix as a proxy before predicting
 # future transition probabilities, the Markov chain reaches its final "solution"
 # state by iteration 6 (denoted by sim_6_w for White for example). At this point, all transient state
