@@ -208,6 +208,7 @@ A_yr2 <- get_column(data, Variable_Type, "Asian yr2", Variable_Value)
 
 # Hispanic/Latinx Year 2:
 L_yr2 <- get_column(data, Variable_Type, "Latinx yr2", Variable_Value)
+#L_yr2
 
 # 2MR Year 2:
 TMR_yr2 <- get_column(data, Variable_Type, "2MR yr2", Variable_Value)
@@ -268,6 +269,9 @@ L_yr2_r12 <- c(integer(13), L_yr2[12], 1-L_yr2[12])
 L_yr2_r13 <- c(integer(13), L_yr2[13], 1-L_yr2[13])
 L_yr2_r14 <- c(integer(13), 1, 0)
 L_yr2_r15 <- c(integer(14), 1)
+
+L_yr2
+#L_yr2_r13
 
 # 2MR Rows:
 TMR_yr2_r1 <- c(0, TMR_yr2[1], 1-TMR_yr2[1], integer(12))
