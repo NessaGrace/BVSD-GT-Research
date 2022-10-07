@@ -8,15 +8,16 @@
 #         Gr_2_GT_W_i, Gr_2_NGT_W_i, Gr_3_GT_W_i, Gr_3_NGT_W_i, Gr_4_GT_W_i,
 #         Gr_4_NGT_W_i, Gr_5_GT_W_i, Gr_5_NGT_W_i, MS_GT_W_i, MS_NGT_W_i)
 
-#TODO: clean up code, add make_matrix_rows(), make_matrix(), get_k_b() functions
+#TODO: clean up code including random comments, doc best practices, 
+#add make_matrix_rows(), make_matrix() functions
 
 #TODO: config file
 
 #TODO: improve variable names? esp TMR vs 2MR
 
-#TODO: make sure output makes sense, check matrices again for neg #'s, 0's, NA's,
-#debug NA's in Latinx, do functions & config, make visualizations and do trends modeling next 
-#(see other lists)
+#TODO: make sure output makes sense, double check data file, check matrices again for neg #'s, 
+#0's, NA's, debug NA's in Latinx, do functions & config, make visualizations and do trends 
+#modeling next (see other lists)
 
 # Note: The absorbing states continue to grow. For example, the GT MS population is 66
 # for Asian students in year 1 because it adds the 38 students in this state at the end of
@@ -208,7 +209,6 @@ A_yr2 <- get_column(data, Variable_Type, "Asian yr2", Variable_Value)
 
 # Hispanic/Latinx Year 2:
 L_yr2 <- get_column(data, Variable_Type, "Latinx yr2", Variable_Value)
-#L_yr2
 
 # 2MR Year 2:
 TMR_yr2 <- get_column(data, Variable_Type, "2MR yr2", Variable_Value)
@@ -269,9 +269,6 @@ L_yr2_r12 <- c(integer(13), L_yr2[12], 1-L_yr2[12])
 L_yr2_r13 <- c(integer(13), L_yr2[13], 1-L_yr2[13])
 L_yr2_r14 <- c(integer(13), 1, 0)
 L_yr2_r15 <- c(integer(14), 1)
-
-L_yr2
-#L_yr2_r13
 
 # 2MR Rows:
 TMR_yr2_r1 <- c(0, TMR_yr2[1], 1-TMR_yr2[1], integer(12))
@@ -668,23 +665,19 @@ sim_4_a <- (sim_3_a + sim_4_a_kb) %*% mat_a_yr4
 
 # Latinx:
 sim_1_L <- L_i %*% mat_L_yr1 #output of this (sim_1_L) is student #'s @ end of 18-19
-#sim_1_L
+sim_1_L
 
 sim_2_L_kb <- get_kb("Latinx yr2 K_B")
 sim_2_L <- (sim_1_L + sim_2_L_kb) %*% mat_L_yr2
-#sim_2_L
-
-#mat_L_yr2
-L_fix <- get_column(data, Variable_Name, "Epsilon_MS_Yr_2_L", Variable_Value)
-# L_fix - being read in correctly but issue in matrix
+sim_2_L
 
 sim_3_L_kb <- get_kb("Latinx yr3 K_B")
 sim_3_L <- (sim_2_L + sim_3_L_kb) %*% mat_L_yr3
-#sim_3_L
+sim_3_L
 
 sim_4_L_kb <- get_kb("Latinx yr4 K_B")
 sim_4_L <- (sim_3_L + sim_4_L_kb) %*% mat_L_yr4
-#sim_4_L
+sim_4_L
 
 # Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
 
