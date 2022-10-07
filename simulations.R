@@ -14,8 +14,8 @@
 
 #TODO: improve variable names? esp TMR vs 2MR
 
-#TODO: add K_B's to simulations, make sure they make sense with output, and finish 
-#other sim's, do functions & config, make visualizations and do trends modeling next 
+#TODO: make sure output makes sense, check matrices again for neg #'s, 0's, NA's,
+#debug NA's in Latinx, do functions & config, make visualizations and do trends modeling next 
 #(see other lists)
 
 # Note: The absorbing states continue to grow. For example, the GT MS population is 66
@@ -628,90 +628,94 @@ mat_Oth_yr4 <- t(matrix(c(Oth_yr4_r1, Oth_yr4_r2, Oth_yr4_r3, Oth_yr4_r4,
 
 # White:
 sim_1_w <- W_i %*% mat_w_yr1 #output of this (sim_1_w) is student #'s @ end of 18-19
-sim_1_w
+#sim_1_w
 
 sim_2_w_kb <- get_kb("White yr2 K_B")
 sim_2_w <- (sim_1_w + sim_2_w_kb) %*% mat_w_yr2
-sim_2_w
+#sim_2_w
 
 sim_3_w_kb <- get_kb("White yr3 K_B")
 sim_3_w <- (sim_2_w + sim_3_w_kb) %*% mat_w_yr3
-sim_3_w
+#sim_3_w
 
 sim_4_w_kb <- get_kb("White yr4 K_B")
 sim_4_w <- (sim_3_w + sim_4_w_kb) %*% mat_w_yr4
-sim_4_w
+#sim_4_w
 
 # Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
 
 # Asian:
 sim_1_a <- A_i %*% mat_a_yr1 #output of this (sim_1_a) is student #'s @ end of 18-19
-sim_1_a
+#sim_1_a
 
 sim_2_a_kb <- get_kb("Asian yr2 K_B")
 sim_2_a <- (sim_1_a + sim_2_a_kb) %*% mat_a_yr2
-sim_2_a
+#sim_2_a
 
 sim_3_a_kb <- get_kb("Asian yr3 K_B")
 sim_3_a <- (sim_2_a + sim_3_a_kb) %*% mat_a_yr3
-sim_3_a
+#sim_3_a
 
 sim_4_a_kb <- get_kb("Asian yr4 K_B")
 sim_4_a <- (sim_3_a + sim_4_a_kb) %*% mat_a_yr4
-sim_4_a
+#sim_4_a
 
 # Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
 
 # Latinx:
 sim_1_L <- L_i %*% mat_L_yr1 #output of this (sim_1_L) is student #'s @ end of 18-19
-sim_1_L
+#sim_1_L
 
 sim_2_L_kb <- get_kb("Latinx yr2 K_B")
 sim_2_L <- (sim_1_L + sim_2_L_kb) %*% mat_L_yr2
-sim_2_L
+#sim_2_L
+
+#mat_L_yr2
+L_fix <- get_column(data, Variable_Name, "Epsilon_MS_Yr_2_L", Variable_Value)
+# L_fix - being read in correctly but issue in matrix
 
 sim_3_L_kb <- get_kb("Latinx yr3 K_B")
 sim_3_L <- (sim_2_L + sim_3_L_kb) %*% mat_L_yr3
-sim_3_L
+#sim_3_L
 
 sim_4_L_kb <- get_kb("Latinx yr4 K_B")
 sim_4_L <- (sim_3_L + sim_4_L_kb) %*% mat_L_yr4
-sim_4_L
+#sim_4_L
 
 # Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
 
 # TMR:
-sim_TMR <- TMR_i %*% mat_TMR_yr1 #output of this (sim_1_TMR) is student #'s @ end of 18-19
-sim_1_TMR
+sim_1_TMR <- TMR_i %*% mat_TMR_yr1 #output of this (sim_1_TMR) is student #'s @ end of 18-19
+#sim_1_TMR
 
 sim_2_TMR_kb <- get_kb("2MR yr2 K_B")
 sim_2_TMR <- (sim_1_TMR + sim_2_TMR_kb) %*% mat_TMR_yr2
-sim_2_TMR
+#sim_2_TMR
 
 sim_3_TMR_kb <- get_kb("2MR yr3 K_B")
 sim_3_TMR <- (sim_2_TMR + sim_3_TMR_kb) %*% mat_TMR_yr3
-sim_3_TMR
+#sim_3_TMR
 
 sim_4_TMR_kb <- get_kb("2MR yr4 K_B")
 sim_4_TMR <- (sim_3_TMR + sim_4_TMR_kb) %*% mat_TMR_yr4
-sim_4_TMR
+#sim_4_TMR
 
 # Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
 
 # Other:
-sim_Oth <- Oth_i %*% mat_Oth_yr1 #output of this (sim_1_Oth) is student #'s @ end of 18-19
-sim_1_Oth
+sim_1_Oth <- Oth_i %*% mat_Oth_yr1 #output of this (sim_1_Oth) is student #'s @ end of 18-19
+#sim_1_Oth
 
 sim_2_Oth_kb <- get_kb("Other yr2 K_B")
 sim_2_Oth <- (sim_1_Oth + sim_2_Oth_kb) %*% mat_Oth_yr2
-sim_2_Oth
+#sim_2_Oth
 
 sim_3_Oth_kb <- get_kb("Other yr3 K_B")
 sim_3_Oth <- (sim_2_Oth + sim_3_Oth_kb) %*% mat_Oth_yr3
-sim_3_Oth
+#sim_3_Oth
 
 sim_4_Oth_kb <- get_kb("Other yr4 K_B")
 sim_4_Oth <- (sim_3_Oth + sim_4_Oth_kb) %*% mat_Oth_yr4
-sim_4_Oth
+#sim_4_Oth
 
 # Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
