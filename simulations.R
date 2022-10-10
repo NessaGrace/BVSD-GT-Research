@@ -1,26 +1,25 @@
 #' This script stores transition probabilities and uses them to construct
 #' transition matrices. We also feed in an initial state vector.
 
-#TODO: still need to add header name vector?
+#TODO:
+# -add header name vector
+# -clean up /improve code including random comments, doc best practices
+# -improve variable names? esp TMR vs 2MR
+# -make sure output makes sense
+# -double check data file
+# -check matrices again for neg #'s, 0's, NA's
+# -config 
+# -make visualizations
+# -do trends modeling next 
+# -see other lists
+# -check for errors due to rounding
+# -see why calculations for number of students between years do not match up
+# -add visualizations - see bottom of script (finish %'s, finish overall, add more!)
 
 # Keep in case needed for header vector
 #W_i_1 <- c(K_B_W_i, K_GT_W_i, K_NGT_W_i, Gr_1_GT_W_i, Gr_1_NGT_W_i,
 #         Gr_2_GT_W_i, Gr_2_NGT_W_i, Gr_3_GT_W_i, Gr_3_NGT_W_i, Gr_4_GT_W_i,
 #         Gr_4_NGT_W_i, Gr_5_GT_W_i, Gr_5_NGT_W_i, MS_GT_W_i, MS_NGT_W_i)
-
-#TODO: clean up /improve code including random comments, doc best practices
-
-#TODO: config file
-
-#TODO: improve variable names? esp TMR vs 2MR
-
-#TODO: make sure output makes sense, double check data file, check matrices again for neg #'s, 
-#0's, NA's, config, make visualizations and do trends 
-#modeling next (see other lists)
-
-#TODO: check for errors due to rounding
-
-#TODO: see why calculations for number of students between years do not match up
 
 # Note: The absorbing states continue to grow. For example, the GT MS population is 66
 # for Asian students in year 1 because it adds the 38 students in this state at the end of
@@ -300,9 +299,18 @@ sim_4_Oth <- (sim_3_Oth + sim_4_Oth_kb) %*% mat_Oth_yr4
 # can track 1 class from K-3rd grade over 4 years (more interesting: plot as % 
 # or probability), may be interesting to start from different points or see
 # how long it takes for a group to get students in GT (later ID more likely
-# for minority groups)
+# for minority groups), NOTE: uses class entering in 2018-19
 
 year <- c(1, 2, 3, 4)
+total_gt_pop_1_class_yr1 <- sim_1_w[2] + sim_1_a[2] + sim_1_L[2] + sim_1_TMR[2] + sim_1_Oth[2]
+                            
+total_gt_pop_1_class_yr2 <- sim_2_w[4] + sim_2_a[4] + sim_2_L[4] + sim_2_TMR[4] + sim_2_Oth[4]
+                            
+total_gt_pop_1_class_yr3 <- sim_3_w[6] + sim_3_a[6] + sim_3_L[6] + sim_3_TMR[6] + sim_3_Oth[6]
+                                                                                          
+total_gt_pop_1_class_yr4 <- sim_4_w[8] + sim_4_a[8] + sim_4_L[8] + sim_4_TMR[8] + sim_4_Oth[8] 
+  
+# all y-axes will be fractions!!
 
 #WHITE#:
 
