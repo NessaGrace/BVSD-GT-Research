@@ -18,6 +18,10 @@
 #0's, NA's, config, make visualizations and do trends 
 #modeling next (see other lists)
 
+#TODO: check for errors due to rounding
+
+#TODO: see why calculations for number of students between years do not match up
+
 # Note: The absorbing states continue to grow. For example, the GT MS population is 66
 # for Asian students in year 1 because it adds the 38 students in this state at the end of
 # 17-18 from the initial state vector with the 28 students who enter this state at the end of
@@ -32,7 +36,8 @@
 
 install.packages("tidyverse")
 library("dplyr")
-library(readxl)
+library("readxl")
+library("ggplot2")
 
 source("functions_lib.R")
 
@@ -289,3 +294,62 @@ sim_4_Oth <- (sim_3_Oth + sim_4_Oth_kb) %*% mat_Oth_yr4
 #sim_4_Oth
 
 # Add predictions below (start with 21-22 to 22-23 transition, i.e. yr5)
+
+#### Visualization: ####
+
+# can track 1 class from K-3rd grade over 4 years (more interesting: plot as % 
+# or probability), may be interesting to start from different points or see
+# how long it takes for a group to get students in GT (later ID more likely
+# for minority groups)
+
+year <- c(1, 2, 3, 4)
+
+#WHITE#:
+
+white_gt_pop_1_class <- c(sim_1_w[2], sim_2_w[4], sim_3_w[6], sim_4_w[8])
+
+df_w_one_class <- data.frame(year, white_gt_pop_1_class)
+
+ggplot(df_w_one_class, aes(year, white_gt_pop_1_class)) +
+  geom_point()
+
+#ASIAN#:
+
+asian_gt_pop_1_class <- c(sim_1_a[2], sim_2_a[4], sim_3_a[6], sim_4_a[8])
+
+df_a_one_class <- data.frame(year, asian_gt_pop_1_class)
+
+ggplot(df_a_one_class, aes(year, asian_gt_pop_1_class)) +
+  geom_point()
+
+#HISPANIC/LATINX#:
+
+latinx_gt_pop_1_class <- c(sim_1_L[2], sim_2_L[4], sim_3_L[6], sim_4_L[8])
+
+df_L_one_class <- data.frame(year, latinx_gt_pop_1_class)
+
+ggplot(df_L_one_class, aes(year, latinx_gt_pop_1_class)) +
+  geom_point()
+
+#2MR#:
+
+TMR_gt_pop_1_class <- c(sim_1_TMR[2], sim_2_TMR[4], sim_3_TMR[6], sim_4_TMR[8])
+
+df_TMR_one_class <- data.frame(year, TMR_gt_pop_1_class)
+
+ggplot(df_TMR_one_class, aes(year, TMR_gt_pop_1_class)) +
+  geom_point()
+
+#Other#:
+
+other_gt_pop_1_class <- c(sim_1_Oth[2], sim_2_Oth[4], sim_3_Oth[6], sim_4_Oth[8])
+
+df_other_one_class <- data.frame(year, other_gt_pop_1_class)
+
+ggplot(df_other_one_class, aes(year, other_gt_pop_1_class)) +
+  geom_point()
+
+# can track school demographics per yr by adding up GT #'s for that yr for each
+# grade (e.g. add all GT #'s for White yr 1, for Asian yr 1, etc)
+
+#YEAR 1#:
