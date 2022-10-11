@@ -2,19 +2,21 @@
 #' transition matrices. We also feed in an initial state vector.
 
 #TODO:
+
+#MAIN PRIORITY:#
+# -add visualizations - RI plots, transition rate plots, predictions, Covid effect if time
+
+#OTHER PRIORITIES (!! means most important):
 # -add header name vector
 # -clean up /improve code including random comments, doc best practices
 # -improve variable names? esp TMR vs 2MR
-# -make sure output makes sense
-# -double check data file
-# -check matrices again for neg #'s, 0's, NA's
+# -make sure output makes sense!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# -double check data file!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# -check matrices again for neg #'s, 0's, NA's!!!!!!!!!!!!!!!!!!!!
 # -config 
-# -make visualizations
-# -do trends modeling next 
-# -see other lists
-# -check for errors due to rounding
-# -see why calculations for number of students between years do not match up
-# -add visualizations - see bottom of script (finish overall, add more!)
+# -see other lists!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# -check for errors due to rounding!!!!!!!!!!!!!!!!!!!!!!!
+# -see why calculations for number of students between years do not match up!!!!!!!!!!!!!!!
 
 # Keep in case needed for header vector
 #W_i_1 <- c(K_B_W_i, K_GT_W_i, K_NGT_W_i, Gr_1_GT_W_i, Gr_1_NGT_W_i,
@@ -524,3 +526,30 @@ df_tall <- melt(df_overall ,  id.vars = 'year', variable.name = 'race')
 
 ggplot(df_tall, aes(year, value)) +
   geom_point(aes(color = race))
+
+#################################################
+
+# Representation index (RI) plots: (note: previous fractions only considered GT pop)
+# RI = % gifted / % general
+
+# White RI:
+RI_w_yr1 <- (overall_white_yr1*100) / 67.5 # 67.5 comes from BVSD Metrics data online
+
+RI_a_yr1 <- (overall_asian_yr1*100) / 5.7
+
+RI_L_yr1 <- (overall_latinx_yr1*100) / 19.6
+
+RI_TMR_yr1 <- (overall_TMR_yr1*100) / 5.8
+
+RI_Oth_yr1 <- (overall_other_yr1*100) / 1.4
+
+RI_yr1 <- c(RI_w_yr1,
+            RI_a_yr1,
+            RI_L_yr1,
+            RI_TMR_yr1,
+            RI_Oth_yr1)
+
+df_RI_yr1 <- data.frame(race=c("w", "a", "L", "TMR", "Oth"), RI_yr1)
+
+ggplot(df_RI_yr1, aes(x=race, y=RI_yr1)) +
+  geom_bar()
