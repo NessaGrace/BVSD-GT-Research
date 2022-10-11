@@ -2,19 +2,21 @@
 #' transition matrices. We also feed in an initial state vector.
 
 #TODO:
+
+#MAIN PRIORITY:#
+# -add visualizations - RI plots, transition rate plots, predictions, Covid effect if time
+
+#OTHER PRIORITIES (!! means most important):
 # -add header name vector
 # -clean up /improve code including random comments, doc best practices
 # -improve variable names? esp TMR vs 2MR
-# -make sure output makes sense
-# -double check data file
-# -check matrices again for neg #'s, 0's, NA's
+# -make sure output makes sense!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# -double check data file!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# -check matrices again for neg #'s, 0's, NA's!!!!!!!!!!!!!!!!!!!!
 # -config 
-# -make visualizations
-# -do trends modeling next 
-# -see other lists
-# -check for errors due to rounding
-# -see why calculations for number of students between years do not match up
-# -add visualizations - see bottom of script (finish %'s, finish overall, add more!)
+# -see other lists!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# -check for errors due to rounding!!!!!!!!!!!!!!!!!!!!!!!
+# -see why calculations for number of students between years do not match up!!!!!!!!!!!!!!!
 
 # Keep in case needed for header vector
 #W_i_1 <- c(K_B_W_i, K_GT_W_i, K_NGT_W_i, Gr_1_GT_W_i, Gr_1_NGT_W_i,
@@ -37,6 +39,7 @@ install.packages("tidyverse")
 library("dplyr")
 library("readxl")
 library("ggplot2")
+library("reshape2")
 
 source("functions_lib.R")
 
@@ -296,8 +299,7 @@ sim_4_Oth <- (sim_3_Oth + sim_4_Oth_kb) %*% mat_Oth_yr4
 
 #### Visualization: ####
 
-# can track 1 class from K-3rd grade over 4 years (more interesting: plot as % 
-# or probability), may be interesting to start from different points or see
+# can track 1 class from K-3rd grade over 4 years, may be interesting to start from different points or see
 # how long it takes for a group to get students in GT (later ID more likely
 # for minority groups), NOTE: uses class entering in 2018-19
 
@@ -314,7 +316,10 @@ total_gt_pop_1_class_yr4 <- sim_4_w[8] + sim_4_a[8] + sim_4_L[8] + sim_4_TMR[8] 
 
 #WHITE#:
 
-white_gt_pop_1_class <- c(sim_1_w[2], sim_2_w[4], sim_3_w[6], sim_4_w[8])
+white_gt_pop_1_class <- c(sim_1_w[2]/total_gt_pop_1_class_yr1, 
+                          sim_2_w[4]/total_gt_pop_1_class_yr2,
+                          sim_3_w[6]/total_gt_pop_1_class_yr3,
+                          sim_4_w[8]/total_gt_pop_1_class_yr4) 
 
 df_w_one_class <- data.frame(year, white_gt_pop_1_class)
 
@@ -323,7 +328,10 @@ ggplot(df_w_one_class, aes(year, white_gt_pop_1_class)) +
 
 #ASIAN#:
 
-asian_gt_pop_1_class <- c(sim_1_a[2], sim_2_a[4], sim_3_a[6], sim_4_a[8])
+asian_gt_pop_1_class <- c(sim_1_a[2]/total_gt_pop_1_class_yr1, 
+                          sim_2_a[4]/total_gt_pop_1_class_yr2,
+                          sim_3_a[6]/total_gt_pop_1_class_yr3,
+                          sim_4_a[8]/total_gt_pop_1_class_yr4) 
 
 df_a_one_class <- data.frame(year, asian_gt_pop_1_class)
 
@@ -332,7 +340,10 @@ ggplot(df_a_one_class, aes(year, asian_gt_pop_1_class)) +
 
 #HISPANIC/LATINX#:
 
-latinx_gt_pop_1_class <- c(sim_1_L[2], sim_2_L[4], sim_3_L[6], sim_4_L[8])
+latinx_gt_pop_1_class <- c(sim_1_L[2]/total_gt_pop_1_class_yr1, 
+                           sim_2_L[4]/total_gt_pop_1_class_yr2,
+                           sim_3_L[6]/total_gt_pop_1_class_yr3,
+                           sim_4_L[8]/total_gt_pop_1_class_yr4) 
 
 df_L_one_class <- data.frame(year, latinx_gt_pop_1_class)
 
@@ -341,7 +352,10 @@ ggplot(df_L_one_class, aes(year, latinx_gt_pop_1_class)) +
 
 #2MR#:
 
-TMR_gt_pop_1_class <- c(sim_1_TMR[2], sim_2_TMR[4], sim_3_TMR[6], sim_4_TMR[8])
+TMR_gt_pop_1_class <- c(sim_1_TMR[2]/total_gt_pop_1_class_yr1, 
+                        sim_2_TMR[4]/total_gt_pop_1_class_yr2,
+                        sim_3_TMR[6]/total_gt_pop_1_class_yr3,
+                        sim_4_TMR[8]/total_gt_pop_1_class_yr4) 
 
 df_TMR_one_class <- data.frame(year, TMR_gt_pop_1_class)
 
@@ -350,14 +364,192 @@ ggplot(df_TMR_one_class, aes(year, TMR_gt_pop_1_class)) +
 
 #Other#:
 
-other_gt_pop_1_class <- c(sim_1_Oth[2], sim_2_Oth[4], sim_3_Oth[6], sim_4_Oth[8])
+other_gt_pop_1_class <- c(sim_1_Oth[2]/total_gt_pop_1_class_yr1, 
+                          sim_2_Oth[4]/total_gt_pop_1_class_yr2,
+                          sim_3_Oth[6]/total_gt_pop_1_class_yr3,
+                          sim_4_Oth[8]/total_gt_pop_1_class_yr4) 
 
 df_other_one_class <- data.frame(year, other_gt_pop_1_class)
 
 ggplot(df_other_one_class, aes(year, other_gt_pop_1_class)) +
   geom_point()
 
-# can track school demographics per yr by adding up GT #'s for that yr for each
+# can track school district demographics per yr by adding up GT #'s for that yr for each
 # grade (e.g. add all GT #'s for White yr 1, for Asian yr 1, etc)
 
 #YEAR 1#:
+overall_gt_population_yr1 <- sim_1_w[2] + sim_1_w[4] + sim_1_w[6] + sim_1_w[8] +
+                             sim_1_w[10] + sim_1_w[12] + sim_1_w[14] + 
+                             sim_1_a[2] + sim_1_a[4] + sim_1_a[6] + sim_1_a[8] +
+                             sim_1_a[10] + sim_1_a[12] + sim_1_a[14] + 
+                             sim_1_L[2] + sim_1_L[4] + sim_1_L[6] + sim_1_L[8] +
+                             sim_1_L[10] + sim_1_L[12] + sim_1_L[14] + 
+                             sim_1_TMR[2] + sim_1_TMR[4] + sim_1_TMR[6] + sim_1_TMR[8] +
+                             sim_1_TMR[10] + sim_1_TMR[12] + sim_1_TMR[14] + 
+                             sim_1_Oth[2] + sim_1_Oth[4] + sim_1_Oth[6] + sim_1_Oth[8] +
+                             sim_1_Oth[10] + sim_1_Oth[12] + sim_1_Oth[14] 
+
+overall_gt_population_yr2 <- sim_2_w[2] + sim_2_w[4] + sim_2_w[6] + sim_2_w[8] +
+                             sim_2_w[10] + sim_2_w[12] + sim_2_w[14] + 
+                             sim_2_a[2] + sim_2_a[4] + sim_2_a[6] + sim_2_a[8] +
+                             sim_2_a[10] + sim_2_a[12] + sim_2_a[14] + 
+                             sim_2_L[2] + sim_2_L[4] + sim_2_L[6] + sim_2_L[8] +
+                             sim_2_L[10] + sim_2_L[12] + sim_2_L[14] + 
+                             sim_2_TMR[2] + sim_2_TMR[4] + sim_2_TMR[6] + sim_2_TMR[8] +
+                             sim_2_TMR[10] + sim_2_TMR[12] + sim_2_TMR[14] + 
+                             sim_2_Oth[2] + sim_2_Oth[4] + sim_2_Oth[6] + sim_2_Oth[8] +
+                             sim_2_Oth[10] + sim_2_Oth[12] + sim_2_Oth[14] 
+
+overall_gt_population_yr3 <- sim_3_w[2] + sim_3_w[4] + sim_3_w[6] + sim_3_w[8] +
+                             sim_3_w[10] + sim_3_w[12] + sim_3_w[14] + 
+                             sim_3_a[2] + sim_3_a[4] + sim_3_a[6] + sim_3_a[8] +
+                             sim_3_a[10] + sim_3_a[12] + sim_3_a[14] + 
+                             sim_3_L[2] + sim_3_L[4] + sim_3_L[6] + sim_3_L[8] +
+                             sim_3_L[10] + sim_3_L[12] + sim_3_L[14] + 
+                             sim_3_TMR[2] + sim_3_TMR[4] + sim_3_TMR[6] + sim_3_TMR[8] +
+                             sim_3_TMR[10] + sim_3_TMR[12] + sim_3_TMR[14] + 
+                             sim_3_Oth[2] + sim_3_Oth[4] + sim_3_Oth[6] + sim_3_Oth[8] +
+                             sim_3_Oth[10] + sim_3_Oth[12] + sim_3_Oth[14] 
+
+overall_gt_population_yr4 <- sim_4_w[2] + sim_4_w[4] + sim_4_w[6] + sim_4_w[8] +
+                             sim_4_w[10] + sim_4_w[12] + sim_4_w[14] + 
+                             sim_4_a[2] + sim_4_a[4] + sim_4_a[6] + sim_4_a[8] +
+                             sim_4_a[10] + sim_4_a[12] + sim_4_a[14] + 
+                             sim_4_L[2] + sim_4_L[4] + sim_4_L[6] + sim_4_L[8] +
+                             sim_4_L[10] + sim_4_L[12] + sim_4_L[14] + 
+                             sim_4_TMR[2] + sim_4_TMR[4] + sim_4_TMR[6] + sim_4_TMR[8] +
+                             sim_4_TMR[10] + sim_4_TMR[12] + sim_4_TMR[14] + 
+                             sim_4_Oth[2] + sim_4_Oth[4] + sim_4_Oth[6] + sim_4_Oth[8] +
+                             sim_4_Oth[10] + sim_4_Oth[12] + sim_4_Oth[14]
+
+overall_white_yr1 <- (sim_1_w[2] + sim_1_w[4] + sim_1_w[6] + sim_1_w[8] +
+                     sim_1_w[10] + sim_1_w[12] + sim_1_w[14])/overall_gt_population_yr1
+
+overall_asian_yr1 <- (sim_1_a[2] + sim_1_a[4] + sim_1_a[6] + sim_1_a[8] +
+                     sim_1_a[10] + sim_1_a[12] + sim_1_a[14])/overall_gt_population_yr1
+
+overall_latinx_yr1 <- (sim_1_L[2] + sim_1_L[4] + sim_1_L[6] + sim_1_L[8] +
+                      sim_1_L[10] + sim_1_L[12] + sim_1_L[14])/overall_gt_population_yr1
+
+overall_TMR_yr1 <- (sim_1_TMR[2] + sim_1_TMR[4] + sim_1_TMR[6] + sim_1_TMR[8] +
+                     sim_1_TMR[10] + sim_1_TMR[12] + sim_1_TMR[14])/overall_gt_population_yr1
+
+overall_other_yr1 <- (sim_1_Oth[2] + sim_1_Oth[4] + sim_1_Oth[6] + sim_1_Oth[8] +
+                     sim_1_Oth[10] + sim_1_Oth[12] + sim_1_Oth[14])/overall_gt_population_yr1
+
+#######################################################
+
+overall_white_yr2 <- (sim_2_w[2] + sim_2_w[4] + sim_2_w[6] + sim_2_w[8] +
+  sim_2_w[10] + sim_2_w[12] + sim_2_w[14])/overall_gt_population_yr2
+
+overall_asian_yr2 <- (sim_2_a[2] + sim_2_a[4] + sim_2_a[6] + sim_2_a[8] +
+  sim_2_a[10] + sim_2_a[12] + sim_2_a[14])/overall_gt_population_yr2
+
+overall_latinx_yr2 <- (sim_2_L[2] + sim_2_L[4] + sim_2_L[6] + sim_2_L[8] +
+  sim_2_L[10] + sim_2_L[12] + sim_2_L[14])/overall_gt_population_yr2
+
+overall_TMR_yr2 <- (sim_2_TMR[2] + sim_2_TMR[4] + sim_2_TMR[6] + sim_2_TMR[8] +
+  sim_2_TMR[10] + sim_2_TMR[12] + sim_2_TMR[14])/overall_gt_population_yr2
+
+overall_other_yr2 <- (sim_2_Oth[2] + sim_2_Oth[4] + sim_2_Oth[6] + sim_2_Oth[8] +
+  sim_2_Oth[10] + sim_2_Oth[12] + sim_2_Oth[14])/overall_gt_population_yr2
+
+############################################
+
+overall_white_yr3 <- (sim_3_w[2] + sim_3_w[4] + sim_3_w[6] + sim_3_w[8] +
+  sim_3_w[10] + sim_3_w[12] + sim_3_w[14])/overall_gt_population_yr3
+
+overall_asian_yr3 <- (sim_3_a[2] + sim_3_a[4] + sim_3_a[6] + sim_3_a[8] +
+  sim_3_a[10] + sim_3_a[12] + sim_3_a[14])/overall_gt_population_yr3
+
+overall_latinx_yr3 <- (sim_3_L[2] + sim_3_L[4] + sim_3_L[6] + sim_3_L[8] +
+  sim_3_L[10] + sim_3_L[12] + sim_3_L[14])/overall_gt_population_yr3
+
+overall_TMR_yr3 <- (sim_3_TMR[2] + sim_3_TMR[4] + sim_3_TMR[6] + sim_3_TMR[8] +
+  sim_3_TMR[10] + sim_3_TMR[12] + sim_3_TMR[14])/overall_gt_population_yr3
+
+overall_other_yr3 <- (sim_3_Oth[2] + sim_3_Oth[4] + sim_3_Oth[6] + sim_3_Oth[8] +
+  sim_3_Oth[10] + sim_3_Oth[12] + sim_3_Oth[14])/overall_gt_population_yr3
+
+##############################################
+
+overall_white_yr4 <- (sim_4_w[2] + sim_4_w[4] + sim_4_w[6] + sim_4_w[8] +
+  sim_4_w[10] + sim_4_w[12] + sim_4_w[14])/overall_gt_population_yr4
+
+overall_asian_yr4 <- (sim_4_a[2] + sim_4_a[4] + sim_4_a[6] + sim_4_a[8] +
+  sim_4_a[10] + sim_4_a[12] + sim_4_a[14])/overall_gt_population_yr4
+
+overall_latinx_yr4 <- (sim_4_L[2] + sim_4_L[4] + sim_4_L[6] + sim_4_L[8] +
+  sim_4_L[10] + sim_4_L[12] + sim_4_L[14])/overall_gt_population_yr4
+
+overall_TMR_yr4 <- (sim_4_TMR[2] + sim_4_TMR[4] + sim_4_TMR[6] + sim_4_TMR[8] +
+  sim_4_TMR[10] + sim_4_TMR[12] + sim_4_TMR[14])/overall_gt_population_yr4
+
+overall_other_yr4 <- (sim_4_Oth[2] + sim_4_Oth[4] + sim_4_Oth[6] + sim_4_Oth[8] +
+  sim_4_Oth[10] + sim_4_Oth[12] + sim_4_Oth[14])/overall_gt_population_yr4
+
+############################################
+
+overall_white_all_years <- c(overall_white_yr1, 
+                             overall_white_yr2, 
+                             overall_white_yr3, 
+                             overall_white_yr4)
+
+overall_asian_all_years <- c(overall_asian_yr1, 
+                             overall_asian_yr2, 
+                             overall_asian_yr3, 
+                             overall_asian_yr4)
+
+overall_latinx_all_years <- c(overall_latinx_yr1, 
+                             overall_latinx_yr2, 
+                             overall_latinx_yr3, 
+                             overall_latinx_yr4)
+
+overall_TMR_all_years <- c(overall_TMR_yr1, 
+                             overall_TMR_yr2, 
+                             overall_TMR_yr3, 
+                             overall_TMR_yr4)
+
+overall_other_all_years <- c(overall_other_yr1, 
+                           overall_other_yr2, 
+                           overall_other_yr3, 
+                           overall_other_yr4)
+
+df_overall <- data.frame(year, 
+                         overall_white_all_years,
+                         overall_asian_all_years,
+                         overall_latinx_all_years,
+                         overall_TMR_all_years,
+                         overall_other_all_years)
+
+df_tall <- melt(df_overall ,  id.vars = 'year', variable.name = 'race')
+
+ggplot(df_tall, aes(year, value)) +
+  geom_point(aes(color = race))
+
+#################################################
+
+# Representation index (RI) plots: (note: previous fractions only considered GT pop)
+# RI = % gifted / % general
+
+# White RI:
+RI_w_yr1 <- (overall_white_yr1*100) / 67.5 # 67.5 comes from BVSD Metrics data online
+
+RI_a_yr1 <- (overall_asian_yr1*100) / 5.7
+
+RI_L_yr1 <- (overall_latinx_yr1*100) / 19.6
+
+RI_TMR_yr1 <- (overall_TMR_yr1*100) / 5.8
+
+RI_Oth_yr1 <- (overall_other_yr1*100) / 1.4
+
+RI_yr1 <- c(RI_w_yr1,
+            RI_a_yr1,
+            RI_L_yr1,
+            RI_TMR_yr1,
+            RI_Oth_yr1)
+
+df_RI_yr1 <- data.frame(race=c("w", "a", "L", "TMR", "Oth"), RI_yr1)
+
+ggplot(df_RI_yr1, aes(x=race, y=RI_yr1)) +
+  geom_bar()
