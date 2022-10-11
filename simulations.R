@@ -14,7 +14,7 @@
 # -see other lists
 # -check for errors due to rounding
 # -see why calculations for number of students between years do not match up
-# -add visualizations - see bottom of script (finish %'s, finish overall, add more!)
+# -add visualizations - see bottom of script (finish overall, add more!)
 
 # Keep in case needed for header vector
 #W_i_1 <- c(K_B_W_i, K_GT_W_i, K_NGT_W_i, Gr_1_GT_W_i, Gr_1_NGT_W_i,
@@ -296,8 +296,7 @@ sim_4_Oth <- (sim_3_Oth + sim_4_Oth_kb) %*% mat_Oth_yr4
 
 #### Visualization: ####
 
-# can track 1 class from K-3rd grade over 4 years (more interesting: plot as % 
-# or probability), may be interesting to start from different points or see
+# can track 1 class from K-3rd grade over 4 years, may be interesting to start from different points or see
 # how long it takes for a group to get students in GT (later ID more likely
 # for minority groups), NOTE: uses class entering in 2018-19
 
@@ -314,7 +313,10 @@ total_gt_pop_1_class_yr4 <- sim_4_w[8] + sim_4_a[8] + sim_4_L[8] + sim_4_TMR[8] 
 
 #WHITE#:
 
-white_gt_pop_1_class <- c(sim_1_w[2], sim_2_w[4], sim_3_w[6], sim_4_w[8])
+white_gt_pop_1_class <- c(sim_1_w[2]/total_gt_pop_1_class_yr1, 
+                          sim_2_w[4]/total_gt_pop_1_class_yr2,
+                          sim_3_w[6]/total_gt_pop_1_class_yr3,
+                          sim_4_w[8]/total_gt_pop_1_class_yr4) 
 
 df_w_one_class <- data.frame(year, white_gt_pop_1_class)
 
@@ -323,7 +325,10 @@ ggplot(df_w_one_class, aes(year, white_gt_pop_1_class)) +
 
 #ASIAN#:
 
-asian_gt_pop_1_class <- c(sim_1_a[2], sim_2_a[4], sim_3_a[6], sim_4_a[8])
+asian_gt_pop_1_class <- c(sim_1_a[2]/total_gt_pop_1_class_yr1, 
+                          sim_2_a[4]/total_gt_pop_1_class_yr2,
+                          sim_3_a[6]/total_gt_pop_1_class_yr3,
+                          sim_4_a[8]/total_gt_pop_1_class_yr4) 
 
 df_a_one_class <- data.frame(year, asian_gt_pop_1_class)
 
@@ -332,7 +337,10 @@ ggplot(df_a_one_class, aes(year, asian_gt_pop_1_class)) +
 
 #HISPANIC/LATINX#:
 
-latinx_gt_pop_1_class <- c(sim_1_L[2], sim_2_L[4], sim_3_L[6], sim_4_L[8])
+latinx_gt_pop_1_class <- c(sim_1_L[2]/total_gt_pop_1_class_yr1, 
+                           sim_2_L[4]/total_gt_pop_1_class_yr2,
+                           sim_3_L[6]/total_gt_pop_1_class_yr3,
+                           sim_4_L[8]/total_gt_pop_1_class_yr4) 
 
 df_L_one_class <- data.frame(year, latinx_gt_pop_1_class)
 
@@ -341,7 +349,10 @@ ggplot(df_L_one_class, aes(year, latinx_gt_pop_1_class)) +
 
 #2MR#:
 
-TMR_gt_pop_1_class <- c(sim_1_TMR[2], sim_2_TMR[4], sim_3_TMR[6], sim_4_TMR[8])
+TMR_gt_pop_1_class <- c(sim_1_TMR[2]/total_gt_pop_1_class_yr1, 
+                        sim_2_TMR[4]/total_gt_pop_1_class_yr2,
+                        sim_3_TMR[6]/total_gt_pop_1_class_yr3,
+                        sim_4_TMR[8]/total_gt_pop_1_class_yr4) 
 
 df_TMR_one_class <- data.frame(year, TMR_gt_pop_1_class)
 
@@ -350,7 +361,10 @@ ggplot(df_TMR_one_class, aes(year, TMR_gt_pop_1_class)) +
 
 #Other#:
 
-other_gt_pop_1_class <- c(sim_1_Oth[2], sim_2_Oth[4], sim_3_Oth[6], sim_4_Oth[8])
+other_gt_pop_1_class <- c(sim_1_Oth[2]/total_gt_pop_1_class_yr1, 
+                          sim_2_Oth[4]/total_gt_pop_1_class_yr2,
+                          sim_3_Oth[6]/total_gt_pop_1_class_yr3,
+                          sim_4_Oth[8]/total_gt_pop_1_class_yr4) 
 
 df_other_one_class <- data.frame(year, other_gt_pop_1_class)
 
