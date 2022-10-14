@@ -301,7 +301,7 @@ sim_4_Oth <- (sim_3_Oth + sim_4_Oth_kb) %*% mat_Oth_yr4
 
 # can track 1 class from K-3rd grade over 4 years, may be interesting to start from different points or see
 # how long it takes for a group to get students in GT (later ID more likely
-# for minority groups), NOTE: uses class entering in 2018-19
+# for minority groups), NOTE: uses class entering in 2018-19, should put in 1 graph
 
 year <- c(1, 2, 3, 4)
 total_gt_pop_1_class_yr1 <- sim_1_w[2] + sim_1_a[2] + sim_1_L[2] + sim_1_TMR[2] + sim_1_Oth[2]
@@ -372,7 +372,9 @@ other_gt_pop_1_class <- c(sim_1_Oth[2]/total_gt_pop_1_class_yr1,
 df_other_one_class <- data.frame(year, other_gt_pop_1_class)
 
 ggplot(df_other_one_class, aes(year, other_gt_pop_1_class)) +
-  geom_point()
+  geom_point() +
+  labs(title="2018-19 Class, Grades K-3",
+       x="Year", y="% of students in GT")
 
 # can track school district demographics per yr by adding up GT #'s for that yr for each
 # grade (e.g. add all GT #'s for White yr 1, for Asian yr 1, etc)
@@ -490,30 +492,30 @@ overall_other_yr4 <- (sim_4_Oth[2] + sim_4_Oth[4] + sim_4_Oth[6] + sim_4_Oth[8] 
 
 ############################################
 
-overall_white_all_years <- c(overall_white_yr1, 
-                             overall_white_yr2, 
-                             overall_white_yr3, 
-                             overall_white_yr4)
+overall_white_all_years <- c(overall_white_yr1*100, 
+                             overall_white_yr2*100, 
+                             overall_white_yr3*100, 
+                             overall_white_yr4*100)
 
-overall_asian_all_years <- c(overall_asian_yr1, 
-                             overall_asian_yr2, 
-                             overall_asian_yr3, 
-                             overall_asian_yr4)
+overall_asian_all_years <- c(overall_asian_yr1*100, 
+                             overall_asian_yr2*100, 
+                             overall_asian_yr3*100, 
+                             overall_asian_yr4*100)
 
-overall_latinx_all_years <- c(overall_latinx_yr1, 
-                             overall_latinx_yr2, 
-                             overall_latinx_yr3, 
-                             overall_latinx_yr4)
+overall_latinx_all_years <- c(overall_latinx_yr1*100, 
+                             overall_latinx_yr2*100, 
+                             overall_latinx_yr3*100, 
+                             overall_latinx_yr4*100)
 
-overall_TMR_all_years <- c(overall_TMR_yr1, 
-                             overall_TMR_yr2, 
-                             overall_TMR_yr3, 
-                             overall_TMR_yr4)
+overall_TMR_all_years <- c(overall_TMR_yr1*100, 
+                             overall_TMR_yr2*100, 
+                             overall_TMR_yr3*100, 
+                             overall_TMR_yr4*100)
 
-overall_other_all_years <- c(overall_other_yr1, 
-                           overall_other_yr2, 
-                           overall_other_yr3, 
-                           overall_other_yr4)
+overall_other_all_years <- c(overall_other_yr1*100, 
+                           overall_other_yr2*100, 
+                           overall_other_yr3*100, 
+                           overall_other_yr4*100)
 
 df_overall <- data.frame(year, 
                          overall_white_all_years,
@@ -522,19 +524,24 @@ df_overall <- data.frame(year,
                          overall_TMR_all_years,
                          overall_other_all_years)
 
-df_tall <- melt(df_overall ,  id.vars = 'year', variable.name = 'race')
+races_for_legend = c("White", "Asian", "Latinx", "Two or more", "Other")
+
+df_tall <- melt(df_overall ,  id.vars = 'year', variable.name = 'Race')
 
 ggplot(df_tall, aes(year, value)) +
-  geom_point(aes(color = race))
+  geom_point(aes(color = Race)) +
+  labs(title="Percentage of GT Population by Race 2017-18 to 2021-22",
+       x="Year", y="% of students in GT") +
+  scale_fill_discrete(name = 'Race', labels=races_for_legend)
 
 #################################################
 
 # Representation index (RI) plots: (note: previous fractions only considered GT pop)
 # RI = % gifted / % general
 
-# White RI:
-RI_w_yr1 <- (overall_white_yr1*100) / 67.5 # 67.5 comes from BVSD Metrics data online
-
+# Year 1 RI's:
+RI_w_yr1 <- (overall_white_yr1*100) / 67.5 # denominators come from BVSD Metrics data online
+                                           # for all grades in 2017-18
 RI_a_yr1 <- (overall_asian_yr1*100) / 5.7
 
 RI_L_yr1 <- (overall_latinx_yr1*100) / 19.6
@@ -549,7 +556,79 @@ RI_yr1 <- c(RI_w_yr1,
             RI_TMR_yr1,
             RI_Oth_yr1)
 
-df_RI_yr1 <- data.frame(race=c("w", "a", "L", "TMR", "Oth"), RI_yr1)
+df_RI_yr1 <- data.frame(Race=c("White", "Asian", "Latinx", "Two or more", "Other"), RI = RI_yr1)
 
-ggplot(df_RI_yr1, aes(x=race, y=RI_yr1)) +
-  geom_bar()
+ggplot(df_RI_yr1, aes(x=Race, y=RI)) +
+  geom_col() +
+  ggtitle("Representation Index (RI) in BVSD, 2018-19")
+
+# Year 2 RI's:
+RI_w_yr2 <- (overall_white_yr2*100) / 67.3
+
+RI_a_yr2 <- (overall_asian_yr2*100) / 5.8
+
+RI_L_yr2 <- (overall_latinx_yr2*100) / 19.5
+
+RI_TMR_yr2 <- (overall_TMR_yr2*100) / 6.0
+
+RI_Oth_yr2 <- (overall_other_yr2*100) / 1.3
+
+RI_yr2 <- c(RI_w_yr2,
+            RI_a_yr2,
+            RI_L_yr2,
+            RI_TMR_yr2,
+            RI_Oth_yr2)
+
+df_RI_yr2 <- data.frame(Race=c("White", "Asian", "Latinx", "Two or more", "Other"), RI = RI_yr2)
+
+ggplot(df_RI_yr2, aes(x=Race, y=RI)) +
+  geom_col() +
+  ggtitle("Representation Index (RI) in BVSD, 2019-20")
+
+# Year 3 RI's:
+RI_w_yr3 <- (overall_white_yr3*100) / 67.0
+
+RI_a_yr3 <- (overall_asian_yr3*100) / 5.7
+
+RI_L_yr3 <- (overall_latinx_yr3*100) / 19.6
+
+RI_TMR_yr3 <- (overall_TMR_yr3*100) / 6.3
+
+RI_Oth_yr3 <- (overall_other_yr3*100) / 1.4
+
+RI_yr3 <- c(RI_w_yr3,
+            RI_a_yr3,
+            RI_L_yr3,
+            RI_TMR_yr3,
+            RI_Oth_yr3)
+
+df_RI_yr3 <- data.frame(Race=c("White", "Asian", "Latinx", "Two or more", "Other"), RI = RI_yr3)
+
+ggplot(df_RI_yr3, aes(x=Race, y=RI)) +
+  geom_col() +
+  ggtitle("Representation Index (RI) in BVSD, 2020-21")
+
+# Year 4 RI's:
+RI_w_yr4 <- (overall_white_yr4*100) / 66.3
+
+RI_a_yr4 <- (overall_asian_yr4*100) / 5.7
+
+RI_L_yr4 <- (overall_latinx_yr4*100) / 20.1
+
+RI_TMR_yr4 <- (overall_TMR_yr4*100) / 6.5
+
+RI_Oth_yr4 <- (overall_other_yr4*100) / 1.4
+
+RI_yr4 <- c(RI_w_yr4,
+            RI_a_yr4,
+            RI_L_yr4,
+            RI_TMR_yr4,
+            RI_Oth_yr4)
+
+df_RI_yr4 <- data.frame(Race=c("White", "Asian", "Latinx", "Two or more", "Other"), RI = RI_yr4)
+
+ggplot(df_RI_yr4, aes(x=Race, y=RI)) +
+  geom_col() +
+  ggtitle("Representation Index (RI) in BVSD, 2021-22")
+
+# add RI tracking over time??
