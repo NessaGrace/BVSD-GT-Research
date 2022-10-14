@@ -376,6 +376,18 @@ ggplot(df_other_one_class, aes(year, other_gt_pop_1_class)) +
   labs(title="2018-19 Class, Grades K-3",
        x="Year", y="% of students in GT")
 
+df_all_races_one_class <- data.frame(year, all_races_one_class=c(white_gt_pop_1_class, 
+                                                                 asian_gt_pop_1_class,
+                                                                 latinx_gt_pop_1_class,
+                                                                 TMR_gt_pop_1_class,
+                                                                 other_gt_pop_1_class),
+                                     Race = c("White", "Asian", "Latinx", "Two or more", "Other"))
+
+ggplot(df_all_races_one_class, aes(x=year, y=all_races_one_class, color=Race)) +
+  geom_point() +
+  labs(title="2018-19 Class of GT Students, Grades K-3",
+       x="Year", y="Fraction of GT Population")
+
 # can track school district demographics per yr by adding up GT #'s for that yr for each
 # grade (e.g. add all GT #'s for White yr 1, for Asian yr 1, etc)
 
