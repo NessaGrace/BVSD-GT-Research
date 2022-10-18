@@ -316,51 +316,71 @@ total_gt_pop_1_class_yr4 <- sim_4_w[8] + sim_4_a[8] + sim_4_L[8] + sim_4_TMR[8] 
 
 #WHITE#:
 
-white_gt_pop_1_class <- c(sim_1_w[2]/total_gt_pop_1_class_yr1, 
-                          sim_2_w[4]/total_gt_pop_1_class_yr2,
-                          sim_3_w[6]/total_gt_pop_1_class_yr3,
-                          sim_4_w[8]/total_gt_pop_1_class_yr4) 
+white_gt_pop_1_class <- c(100*(sim_1_w[2]/total_gt_pop_1_class_yr1), 
+                          100*(sim_2_w[4]/total_gt_pop_1_class_yr2),
+                          100*(sim_3_w[6]/total_gt_pop_1_class_yr3),
+                          100*(sim_4_w[8]/total_gt_pop_1_class_yr4)) 
 
 df_w_one_class <- data.frame(year, white_gt_pop_1_class)
 
 ggplot(df_w_one_class, aes(year, white_gt_pop_1_class)) +
-  geom_point()
+  geom_point(size=3) + 
+  labs(title="2018-19 Class of White GT Students, Grades K-3",
+       x="Year", y="% of GT Population") +
+  theme(plot.title = element_text(size = 20)) +
+  theme(axis.title = element_text(size = 15)) +
+  theme(axis.text = element_text(size = 13))
 
 #ASIAN#:
 
-asian_gt_pop_1_class <- c(sim_1_a[2]/total_gt_pop_1_class_yr1, 
-                          sim_2_a[4]/total_gt_pop_1_class_yr2,
-                          sim_3_a[6]/total_gt_pop_1_class_yr3,
-                          sim_4_a[8]/total_gt_pop_1_class_yr4) 
+asian_gt_pop_1_class <- c(100*(sim_1_a[2]/total_gt_pop_1_class_yr1), 
+                          100*(sim_2_a[4]/total_gt_pop_1_class_yr2),
+                          100*(sim_3_a[6]/total_gt_pop_1_class_yr3),
+                          100*(sim_4_a[8]/total_gt_pop_1_class_yr4)) 
 
 df_a_one_class <- data.frame(year, asian_gt_pop_1_class)
 
 ggplot(df_a_one_class, aes(year, asian_gt_pop_1_class)) +
-  geom_point()
+  geom_point(size=3) + 
+  labs(title="2018-19 Class of Asian GT Students, Grades K-3",
+       x="Year", y="% of GT Population") +
+  theme(plot.title = element_text(size = 20)) +
+  theme(axis.title = element_text(size = 15)) +
+  theme(axis.text = element_text(size = 13))
 
 #HISPANIC/LATINX#:
 
-latinx_gt_pop_1_class <- c(sim_1_L[2]/total_gt_pop_1_class_yr1, 
-                           sim_2_L[4]/total_gt_pop_1_class_yr2,
-                           sim_3_L[6]/total_gt_pop_1_class_yr3,
-                           sim_4_L[8]/total_gt_pop_1_class_yr4) 
+latinx_gt_pop_1_class <- c(100*(sim_1_L[2]/total_gt_pop_1_class_yr1), 
+                           100*(sim_2_L[4]/total_gt_pop_1_class_yr2),
+                           100*(sim_3_L[6]/total_gt_pop_1_class_yr3),
+                           100*(sim_4_L[8]/total_gt_pop_1_class_yr4))
 
 df_L_one_class <- data.frame(year, latinx_gt_pop_1_class)
 
 ggplot(df_L_one_class, aes(year, latinx_gt_pop_1_class)) +
-  geom_point()
+  geom_point(size=3) +
+  labs(title="2018-19 Class of Latinx GT Students, Grades K-3",
+       x="Year", y="% of GT Population") +
+  theme(plot.title = element_text(size = 20)) +
+  theme(axis.title = element_text(size = 15)) +
+  theme(axis.text = element_text(size = 13))
 
 #2MR#:
 
-TMR_gt_pop_1_class <- c(sim_1_TMR[2]/total_gt_pop_1_class_yr1, 
-                        sim_2_TMR[4]/total_gt_pop_1_class_yr2,
-                        sim_3_TMR[6]/total_gt_pop_1_class_yr3,
-                        sim_4_TMR[8]/total_gt_pop_1_class_yr4) 
+TMR_gt_pop_1_class <- c(100*(sim_1_TMR[2]/total_gt_pop_1_class_yr1), 
+                        100*(sim_2_TMR[4]/total_gt_pop_1_class_yr2),
+                        100*(sim_3_TMR[6]/total_gt_pop_1_class_yr3),
+                        100*(sim_4_TMR[8]/total_gt_pop_1_class_yr4)) 
 
 df_TMR_one_class <- data.frame(year, TMR_gt_pop_1_class)
 
 ggplot(df_TMR_one_class, aes(year, TMR_gt_pop_1_class)) +
-  geom_point()
+  geom_point(size=3) + 
+  labs(title="2018-19 Class of TMR GT Students, Grades K-3",
+       x="Year", y="% of GT Population") +
+  theme(plot.title = element_text(size = 20)) +
+  theme(axis.title = element_text(size = 15)) +
+  theme(axis.text = element_text(size = 13))
 
 #Other#:
 
@@ -371,22 +391,33 @@ other_gt_pop_1_class <- c(sim_1_Oth[2]/total_gt_pop_1_class_yr1,
 
 df_other_one_class <- data.frame(year, other_gt_pop_1_class)
 
-ggplot(df_other_one_class, aes(year, other_gt_pop_1_class)) +
-  geom_point() +
-  labs(title="2018-19 Class, Grades K-3",
-       x="Year", y="% of students in GT")
+# ggplot(df_other_one_class, aes(year, other_gt_pop_1_class)) +
+#   geom_point() +
+#   labs(title="2018-19 Class, Grades K-3",
+#        x="Year", y="% of students in GT")
 
-df_all_races_one_class <- data.frame(year, all_races_one_class=c(white_gt_pop_1_class, 
-                                                                 asian_gt_pop_1_class,
-                                                                 latinx_gt_pop_1_class,
-                                                                 TMR_gt_pop_1_class,
-                                                                 other_gt_pop_1_class),
-                                     Race = c("White", "Asian", "Latinx", "Two or more", "Other"))
+df_all_races_one_class <- data.frame(year, 
+                                     all_races_one_class=c(white_gt_pop_1_class, 
+                                                           asian_gt_pop_1_class,
+                                                           latinx_gt_pop_1_class,
+                                                           TMR_gt_pop_1_class,
+                                                           other_gt_pop_1_class),
+                                     Race = c("White", "White", "White", "White", 
+                                              "Asian", "Asian", "Asian", "Asian", 
+                                              "Latinx", "Latinx", "Latinx", "Latinx",
+                                              "Two or more", "Two or more", "Two or more", "Two or more",
+                                              "Other", "Other", "Other", "Other"))
 
 ggplot(df_all_races_one_class, aes(x=year, y=all_races_one_class, color=Race)) +
-  geom_point() +
+  geom_point(size=3) +
   labs(title="2018-19 Class of GT Students, Grades K-3",
-       x="Year", y="Fraction of GT Population")
+       x="Year", y="% of GT Population") +
+  theme(plot.title = element_text(size = 20)) +
+  theme(axis.title = element_text(size = 15)) +
+  theme(axis.text = element_text(size = 13)) + 
+  theme(legend.text = element_text(size = 13)) +
+  theme(legend.title = element_text(size = 15)) +
+  theme(legend.position ="bottom")
 
 # can track school district demographics per yr by adding up GT #'s for that yr for each
 # grade (e.g. add all GT #'s for White yr 1, for Asian yr 1, etc)
@@ -530,21 +561,29 @@ overall_other_all_years <- c(overall_other_yr1*100,
                            overall_other_yr4*100)
 
 df_overall <- data.frame(year, 
-                         overall_white_all_years,
-                         overall_asian_all_years,
-                         overall_latinx_all_years,
-                         overall_TMR_all_years,
-                         overall_other_all_years)
+                         percent_gt=c(overall_white_all_years,
+                                        overall_asian_all_years,
+                                        overall_latinx_all_years,
+                                        overall_TMR_all_years,
+                                        overall_other_all_years),
+                         Race=c("White", "White", "White", "White", 
+                                "Asian", "Asian", "Asian", "Asian", 
+                                "Latinx", "Latinx", "Latinx", "Latinx",
+                                "Two or more", "Two or more", "Two or more", "Two or more",
+                                "Other", "Other", "Other", "Other"))
 
-races_for_legend = c("White", "Asian", "Latinx", "Two or more", "Other")
+#df_tall <- melt(df_overall ,  id.vars = 'year', variable.name = 'Race')
 
-df_tall <- melt(df_overall ,  id.vars = 'year', variable.name = 'Race')
-
-ggplot(df_tall, aes(year, value)) +
-  geom_point(aes(color = Race)) +
-  labs(title="Percentage of GT Population by Race 2017-18 to 2021-22",
-       x="Year", y="% of students in GT") +
-  scale_fill_discrete(name = 'Race', labels=races_for_legend)
+ggplot(df_overall, aes(x=year, y=percent_gt, color=Race)) +
+  geom_point(size=3) +
+  labs(title="District-Wide GT Population by Race 2018-19 to 2021-22",
+       x="Year", y="% of GT Population") +
+  theme(plot.title = element_text(size = 19)) +
+  theme(axis.title = element_text(size = 15)) +
+  theme(axis.text = element_text(size = 13)) + 
+  theme(legend.text = element_text(size = 13)) +
+  theme(legend.title = element_text(size = 15)) +
+  theme(legend.position ="bottom")  
 
 #################################################
 
@@ -572,7 +611,11 @@ df_RI_yr1 <- data.frame(Race=c("White", "Asian", "Latinx", "Two or more", "Other
 
 ggplot(df_RI_yr1, aes(x=Race, y=RI)) +
   geom_col() +
-  ggtitle("Representation Index (RI) in BVSD, 2018-19")
+  ggtitle("Representation Index (RI) in BVSD, 2018-19") +
+  geom_text(aes(label=round(RI, digits=2), vjust=-0.5), size=4.5) +
+  theme(plot.title = element_text(size = 19)) +
+  theme(axis.title = element_text(size = 15)) +
+  theme(axis.text = element_text(size = 13))
 
 # Year 2 RI's:
 RI_w_yr2 <- (overall_white_yr2*100) / 67.3
@@ -595,7 +638,11 @@ df_RI_yr2 <- data.frame(Race=c("White", "Asian", "Latinx", "Two or more", "Other
 
 ggplot(df_RI_yr2, aes(x=Race, y=RI)) +
   geom_col() +
-  ggtitle("Representation Index (RI) in BVSD, 2019-20")
+  ggtitle("Representation Index (RI) in BVSD, 2019-20") +
+  geom_text(aes(label=round(RI, digits=2), vjust=-0.5), size=4.5) +
+  theme(plot.title = element_text(size = 19)) +
+  theme(axis.title = element_text(size = 15)) +
+  theme(axis.text = element_text(size = 13))
 
 # Year 3 RI's:
 RI_w_yr3 <- (overall_white_yr3*100) / 67.0
@@ -618,7 +665,11 @@ df_RI_yr3 <- data.frame(Race=c("White", "Asian", "Latinx", "Two or more", "Other
 
 ggplot(df_RI_yr3, aes(x=Race, y=RI)) +
   geom_col() +
-  ggtitle("Representation Index (RI) in BVSD, 2020-21")
+  ggtitle("Representation Index (RI) in BVSD, 2020-21") +
+  geom_text(aes(label=round(RI, digits=2), vjust=-0.5), size=4.5) +
+  theme(plot.title = element_text(size = 19)) +
+  theme(axis.title = element_text(size = 15)) +
+  theme(axis.text = element_text(size = 13))
 
 # Year 4 RI's:
 RI_w_yr4 <- (overall_white_yr4*100) / 66.3
@@ -641,6 +692,48 @@ df_RI_yr4 <- data.frame(Race=c("White", "Asian", "Latinx", "Two or more", "Other
 
 ggplot(df_RI_yr4, aes(x=Race, y=RI)) +
   geom_col() +
-  ggtitle("Representation Index (RI) in BVSD, 2021-22")
+  ggtitle("Representation Index (RI) in BVSD, 2021-22") +
+  geom_text(aes(label=round(RI, digits=2), vjust=-0.5), size=4.5) +
+  theme(plot.title = element_text(size = 19)) +
+  theme(axis.title = element_text(size = 15)) +
+  theme(axis.text = element_text(size = 13))
 
-# add RI tracking over time??
+# RI over time
+df_RI <- data.frame(year=c(1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4),
+                    RI=c(RI_yr1, RI_yr2, RI_yr3, RI_yr4),
+                    Race=c("White", "Asian", "Latinx", "Two or more", "Other"))
+
+ggplot(df_RI, aes(x=year, y=RI, color=Race)) +
+  geom_point(size=3) +
+  labs(title="Representation Index (RI) 2018-19 to 2021-22", x="Year", y="RI") +
+  theme(plot.title = element_text(size = 19)) +
+  theme(axis.title = element_text(size = 15)) +
+  theme(axis.text = element_text(size = 13)) + 
+  theme(legend.text = element_text(size = 13)) +
+  theme(legend.title = element_text(size = 15)) +
+  theme(legend.position ="bottom") 
+
+# Transition rate plots:
+# looks at the effects of universal screening by looking at epsilon values before
+# and after 2nd -> 3rd grade transition (eps=epsilon, bef=before, aft=after)
+
+# medians yr1 w,a,tmr eps 0,1 (dom is dominant)
+eps_bef_med_dom <- median(c(0.038901602, 0.052442529, 0.015384615, 0.104347826,
+                            0.008849558, 0.086614173))
+
+# medians yr1 w,a,tmr eps 2,3
+eps_aft_med_dom <- median(c(0.083207262, 0.061430793, 0.098214286, 0.10989011, 
+                            0.127272727, 0))
+
+# medians yr1 L,oth eps 0,1 (sub is subordinate)
+#eps_bef_med_sub <- median(c(0.022160665, 0.036674817, 0.058823529, 0))
+eps_bef_med_sub <- median(c(0.022160665, 0.036674817))
+
+# median yr1 L,other eps 2,3
+#eps_aft_med_sub <- median(c(0.034825871, 0.032258065, 0, 0))
+eps_aft_med_sub <- median(c(0.034825871, 0.032258065))
+
+df_univ_scrn <- data.frame(groups=c("Well-represented", "Well-represented",
+                                    "Under-represented", "Under-represented"),
+                           medians=c(eps_bef_med_dom, eps_aft_med_dom, 
+                                     eps_bef_med_sub, eps_aft_med_sub))
