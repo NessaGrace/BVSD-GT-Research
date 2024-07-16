@@ -17,27 +17,59 @@
 #'                       function) and builds transition matrix
 
 # Install packages and load libraries:
-install.packages("tidyverse")
 library("dplyr")
 library("readxl")
 library("ggplot2")
 library("reshape2")
 
-source("functions_lib.R")  # loads the functions script for use in this script
+# Load the functions script for use in this script
+source("functions_lib.R")
 
 # Read in data from CSV file:
 data <- read_xlsx("Initial_state_vector_&_transition_probability_parameters.xlsx", 
                   sheet=1, 
-                  guess_max = 10000)
+                  guess_max = 10000,
+                  col_names=FALSE)
+
+# Remove the first and second rows to have correct names of headers
+data <- data[-c(1,2), ]
+
+# Correct to avoid multiple columns with same name (not allowed in R) & remove
+# footnote labels from headers and Race column
+colnames(data) = c("Year_i-1_Tableau", "Year_i_Tableau", "Grade_i-1_Tableau",
+                   "Grade_i_Tableau", "Race", "Percent_of_Total_i-1",
+                   "Percent_of_Total_i", "Number_in_GT_i-1", "Number_in_GT_i",
+                   "Date_of_Spreadsheet", "Year_i-1_Hist_Count",
+                   "Year_i_Hist_Count", "Grade_i-1_Hist_Count",
+                   "Grade_i_Hist_Count", "Count_i-1", "Count_i",
+                   "Variable_Type", "Variable_Name", "Variable_Meaning",
+                   "Variable_Value")
+data[101, "Race"] = "Other (Oth)"
+
+# Adjust to rounding down to nearest whole number for number of students only,
+# not for transition probabilities
+data <- data %>%
+  mutate(Variable_Value = as.numeric(Variable_Value))
+
+data <- data %>%
+  mutate(Variable_Value = case_when(
+    grepl("initial", Variable_Type) ~ round(Variable_Value, digits = 0),
+    grepl("K_B", Variable_Type) ~ round(Variable_Value, digits = 0),
+    TRUE ~ Variable_Value
+  ))
+
+data$Variable_Value <- format(data$Variable_Value, scientific = FALSE)
 
 # Get data for initial state vectors into vector format:
 W_i <- get_column(data, Variable_Type, "White initial", Variable_Value)
 A_i <- get_column(data, Variable_Type, "Asian initial", Variable_Value)
 L_i <- get_column(data, Variable_Type, "Latinx initial", Variable_Value)
-TMR_i <- get_column(data, Variable_Type, "2MR initial", Variable_Value)
+TMR_i <- get_column(data, Variable_Type, "TMR initial", Variable_Value)
 Oth_i <- get_column(data, Variable_Type, "Other initial", Variable_Value)
 
-##############YEAR 1##############################
+################################################################################
+# Set up transition matrices Year 1
+################################################################################
 
 # Get data for yr 1 transition probabilities into vectors:
 # White Year 1:
@@ -49,8 +81,8 @@ A_yr1 <- get_column(data, Variable_Type, "Asian yr1", Variable_Value)
 # Hispanic/Latinx Year 1:
 L_yr1 <- get_column(data, Variable_Type, "Latinx yr1", Variable_Value)
 
-# 2MR Year 1:
-TMR_yr1 <- get_column(data, Variable_Type, "2MR yr1", Variable_Value)
+# TMR Year 1:
+TMR_yr1 <- get_column(data, Variable_Type, "TMR yr1", Variable_Value)
 
 # Other Year 1:
 Oth_yr1 <- get_column(data, Variable_Type, "Other yr1", Variable_Value)
@@ -65,13 +97,15 @@ mat_a_yr1 <- make_matrix(A_yr1)
 # Hispanic/Latinx Rows:
 mat_L_yr1 <- make_matrix(L_yr1)
 
-# 2MR Rows:
+# TMR Rows:
 mat_TMR_yr1 <- make_matrix(TMR_yr1)
 
 # Other Rows:
 mat_Oth_yr1 <- make_matrix(Oth_yr1)
 
-##############Year 2##############################
+################################################################################
+# Set up transition matrices Year 2
+################################################################################
 
 # Get data for yr 2 transition probabilities into vectors:
 # White Year 2:
@@ -83,8 +117,8 @@ A_yr2 <- get_column(data, Variable_Type, "Asian yr2", Variable_Value)
 # Hispanic/Latinx Year 2:
 L_yr2 <- get_column(data, Variable_Type, "Latinx yr2", Variable_Value)
 
-# 2MR Year 2:
-TMR_yr2 <- get_column(data, Variable_Type, "2MR yr2", Variable_Value)
+# TMR Year 2:
+TMR_yr2 <- get_column(data, Variable_Type, "TMR yr2", Variable_Value)
 
 # Other Year 2:
 Oth_yr2 <- get_column(data, Variable_Type, "Other yr2", Variable_Value)
@@ -99,13 +133,15 @@ mat_a_yr2 <- make_matrix(A_yr2)
 # Hispanic/Latinx Rows:
 mat_L_yr2 <- make_matrix(L_yr2)
 
-# 2MR Rows:
+# TMR Rows:
 mat_TMR_yr2 <- make_matrix(TMR_yr2)
 
 # Other Rows:
 mat_Oth_yr2 <- make_matrix(Oth_yr2)
 
-##############Year 3##############################
+################################################################################
+# Set up transition matrices Year 3
+################################################################################
 
 # Get data for yr 3 transition probabilities into vectors:
 # White Year 3:
@@ -117,8 +153,8 @@ A_yr3 <- get_column(data, Variable_Type, "Asian yr3", Variable_Value)
 # Hispanic/Latinx Year 3:
 L_yr3 <- get_column(data, Variable_Type, "Latinx yr3", Variable_Value)
 
-# 2MR Year 3:
-TMR_yr3 <- get_column(data, Variable_Type, "2MR yr3", Variable_Value)
+# TMR Year 3:
+TMR_yr3 <- get_column(data, Variable_Type, "TMR yr3", Variable_Value)
 
 # Other Year 3:
 Oth_yr3 <- get_column(data, Variable_Type, "Other yr3", Variable_Value)
@@ -133,13 +169,15 @@ mat_a_yr3 <- make_matrix(A_yr3)
 # Hispanic/Latinx Rows:
 mat_L_yr3 <- make_matrix(L_yr3)
 
-# 2MR Rows:
+# TMR Rows:
 mat_TMR_yr3 <- make_matrix(TMR_yr3)
 
 # Other Rows:
 mat_Oth_yr3 <- make_matrix(Oth_yr3)
 
-##############Year 4##############################
+################################################################################
+# Set up transition matrices Year 4
+################################################################################
 
 # Get data for yr 4 transition probabilities into vectors:
 # White Year 4:
@@ -151,8 +189,8 @@ A_yr4 <- get_column(data, Variable_Type, "Asian yr4", Variable_Value)
 # Hispanic/Latinx Year 4:
 L_yr4 <- get_column(data, Variable_Type, "Latinx yr4", Variable_Value)
 
-# 2MR Year 4:
-TMR_yr4 <- get_column(data, Variable_Type, "2MR yr4", Variable_Value)
+# TMR Year 4:
+TMR_yr4 <- get_column(data, Variable_Type, "TMR yr4", Variable_Value)
 
 # Other Year 4:
 Oth_yr4 <- get_column(data, Variable_Type, "Other yr4", Variable_Value)
@@ -173,9 +211,83 @@ mat_TMR_yr4 <- make_matrix(TMR_yr4)
 # Other Rows:
 mat_Oth_yr4 <- make_matrix(Oth_yr4)
 
+################################################################################
+# Set up transition matrices Year 5
+################################################################################
+
+# Get data for yr 5 transition probabilities into vectors:
+# White Year 5:
+W_yr5 <- get_column(data, Variable_Type, "White yr5", Variable_Value)
+
+# Asian Year 5:
+A_yr5 <- get_column(data, Variable_Type, "Asian yr5", Variable_Value)
+
+# Hispanic/Latinx Year 5:
+L_yr5 <- get_column(data, Variable_Type, "Latinx yr5", Variable_Value)
+
+# TMR Year 5:
+TMR_yr5 <- get_column(data, Variable_Type, "TMR yr5", Variable_Value)
+
+# Other Year 5:
+Oth_yr5 <- get_column(data, Variable_Type, "Other yr5", Variable_Value)
+
+# Create transition matrices for year 5
+# White Matrix:
+mat_w_yr5 <- make_matrix(W_yr5)
+
+# Asian Matrix Rows:
+mat_a_yr5 <- make_matrix(A_yr5)
+
+# Hispanic/Latinx Rows:
+mat_L_yr5 <- make_matrix(L_yr5)
+
+# TMR Rows:
+mat_TMR_yr5 <- make_matrix(TMR_yr5)
+
+# Other Rows:
+mat_Oth_yr5 <- make_matrix(Oth_yr5)
+
+################################################################################
+# Set up transition matrices Year 6
+################################################################################
+
+# Get data for yr 6 transition probabilities into vectors:
+# White Year 6:
+W_yr6 <- get_column(data, Variable_Type, "White yr6", Variable_Value)
+
+# Asian Year 6:
+A_yr6 <- get_column(data, Variable_Type, "Asian yr6", Variable_Value)
+
+# Hispanic/Latinx Year 6:
+L_yr6 <- get_column(data, Variable_Type, "Latinx yr6", Variable_Value)
+
+# TMR Year 6:
+TMR_yr6 <- get_column(data, Variable_Type, "TMR yr6", Variable_Value)
+
+# Other Year 6:
+Oth_yr6 <- get_column(data, Variable_Type, "Other yr6", Variable_Value)
+
+# Create transition matrices for year 6
+# White Matrix:
+mat_w_yr6 <- make_matrix(W_yr6)
+
+# Asian Matrix Rows:
+mat_a_yr6 <- make_matrix(A_yr6)
+
+# Hispanic/Latinx Rows:
+mat_L_yr6 <- make_matrix(L_yr6)
+
+# TMR Rows:
+mat_TMR_yr6 <- make_matrix(TMR_yr6)
+
+# Other Rows:
+mat_Oth_yr6 <- make_matrix(Oth_yr6)
+
+################################################################################
 #' Create Markov chain training set (this is the training set only since this is
-#' created with existing data instead of making predictions. This will be used
+#' created with existing data instead of making predictions. This can be used
 #' to make predictions/create simulations into the future later on.)
+################################################################################
 
 # White training set across all 4 yrs:
 # Year 1
@@ -234,15 +346,15 @@ ts_1_TMR <- TMR_i %*% mat_TMR_yr1 # output of this (ts_1_TMR) is student #'s
                                    # @ end of 18-19 academic year
 
 # Year 2
-ts_2_TMR_kb <- get_kb("2MR yr2 K_B")
+ts_2_TMR_kb <- get_kb("TMR yr2 K_B")
 ts_2_TMR <- (ts_1_TMR + ts_2_TMR_kb) %*% mat_TMR_yr2
 
 # Year 3
-ts_3_TMR_kb <- get_kb("2MR yr3 K_B")
+ts_3_TMR_kb <- get_kb("TMR yr3 K_B")
 ts_3_TMR <- (ts_2_TMR + ts_3_TMR_kb) %*% mat_TMR_yr3
 
 # Year 4
-ts_4_TMR_kb <- get_kb("2MR yr4 K_B")
+ts_4_TMR_kb <- get_kb("TMR yr4 K_B")
 ts_4_TMR <- (ts_3_TMR + ts_4_TMR_kb) %*% mat_TMR_yr4
 
 # Other training set across all 4 yrs:
@@ -262,7 +374,9 @@ ts_3_Oth <- (ts_2_Oth + ts_3_Oth_kb) %*% mat_Oth_yr3
 ts_4_Oth_kb <- get_kb("Other yr4 K_B")
 ts_4_Oth <- (ts_3_Oth + ts_4_Oth_kb) %*% mat_Oth_yr4
 
-# All code below this point is for visualizing the training set data:
+################################################################################
+# Data visualization
+################################################################################
 
 # Graphing the results for the kindergartners who enter in Year 1 through Year
 # 4, when they are in 3rd grade. This is tracking the 18-19 entry class of GT 
@@ -343,15 +457,15 @@ ggplot(df_L_18_19, aes(year, latinx_gt_pop_18_19)) +
   theme(axis.title = element_text(size = 15)) +
   theme(axis.text = element_text(size = 13))
 
-# 2MR:
+# TMR:
 
-# Find percent of 2MR students in GT in the 18-19 class:
+# Find percent of TMR students in GT in the 18-19 class:
 TMR_gt_pop_18_19 <- c(100*(ts_1_TMR[2]/total_gt_pop_18_19_yr1), 
                         100*(ts_2_TMR[4]/total_gt_pop_18_19_yr2),
                         100*(ts_3_TMR[6]/total_gt_pop_18_19_yr3),
                         100*(ts_4_TMR[8]/total_gt_pop_18_19_yr4)) 
 
-# Put 2MR 18-19 class percents in data frame for graphing
+# Put TMR 18-19 class percents in data frame for graphing
 df_TMR_18_19 <- data.frame(year, TMR_gt_pop_18_19)
 
 # Plot the results
@@ -568,14 +682,14 @@ df_overall <- data.frame(year=c('2018-19', '2019-20', '2020-21', '2021-22'),
                                 "Other", "Other", "Other", "Other"))
 # Plots the results
 ggplot(df_overall, aes(x=year, y=percent_gt, color=Race)) +
-  geom_point(size=3) +
+  geom_point(size=5) +
   labs(title="District-Wide GT Racial Composition, 2018-19 to 2021-22",
        x="Year", y="% of GT Population") +
-  theme(plot.title = element_text(size = 19)) +
-  theme(axis.title = element_text(size = 15)) +
-  theme(axis.text = element_text(size = 13)) + 
-  theme(legend.text = element_text(size = 13)) +
-  theme(legend.title = element_text(size = 15)) +
+  theme(plot.title = element_text(size = 21)) +
+  theme(axis.title = element_text(size = 17)) +
+  theme(axis.text = element_text(size = 15)) + 
+  theme(legend.text = element_text(size = 15)) +
+  theme(legend.title = element_text(size = 17)) +
   theme(legend.position ="bottom")  
 
 ###############################################################################
@@ -714,11 +828,11 @@ df_RI <- data.frame(year=c('2018-19','2018-19','2018-19','2018-19','2018-19',
 
 # plot results
 ggplot(df_RI, aes(x=year, y=RI, color=Race)) +
-  geom_point(size=3) +
+  geom_point(size=5) +
   labs(title="Representation Index (RI) in BVSD, 2018-19 to 2021-22", x="Year", y="RI") +
-  theme(plot.title = element_text(size = 19)) +
-  theme(axis.title = element_text(size = 15)) +
-  theme(axis.text = element_text(size = 13)) +
-  theme(legend.text = element_text(size = 13)) +
-  theme(legend.title = element_text(size = 15)) +
+  theme(plot.title = element_text(size = 21)) +
+  theme(axis.title = element_text(size = 17)) +
+  theme(axis.text = element_text(size = 15)) +
+  theme(legend.text = element_text(size = 15)) +
+  theme(legend.title = element_text(size = 17)) +
   theme(legend.position ="bottom")
