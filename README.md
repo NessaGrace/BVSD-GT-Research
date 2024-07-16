@@ -1,5 +1,7 @@
 # A Mathematical Model for Underrepresentation in Gifted and Talented Programs in Boulder Valley School District
 
+# This is just Vanessa testing the Git workflow.
+
 ## Project Description
 In this project, we use absorbing Markov chains to model racial and ethnic 
 underrepresentation in the Boulder Valley School District gifted and talented
