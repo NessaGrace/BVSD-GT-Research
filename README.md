@@ -18,11 +18,7 @@ student body) of different changes to the transition probability of GT selection
 
 ## Installation and setup instructions
 Run the following installations in your console (as applicable) prior to running "markov_chains.R":
-install.packages("tidyverse")
-install.packages("readxl")
-install.packages("reshape2")
-install.packages("xtable")
-install.packages("knitr")
+install.packages(c("tidyverse", "readxl", "reshape2", "xtable", "knitr"))
 
 Ensure that the data file "Initial_state_vector_&_transition_probability_parameters.xlsx" and
 the script "functions_lib.R" are in your working directory prior to running "markov_chains.R".
