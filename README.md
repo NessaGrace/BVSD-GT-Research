@@ -2,7 +2,7 @@
 
 ## Project Description
 In this project, we analyze data for four equity metrics in Boulder Valley School District using
-data from their public Tableau dashboard. These metrics include suspension rates, gifted and
+data from their [public Tableau dashboard](https://public.tableau.com/app/profile/boulder.valley.school.district/viz/StrategicPlanMetrics/Home). These metrics include suspension rates, gifted and
 talented program selection, advanced classes, and upper-level math. Data analysis is provided to
 analyze trends in these metrics as well as analyze the impact of a report by the Latinx Parent
 Advisory Committee in 2020, which provided recommendations for improving representation within
